@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "user": {
+      "title": "User Profile",
+      "description": "User account information and preferences",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "phone": { "type": "string" },
+        "profile_image": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "booking": {
+      "title": "Booking",
+      "description": "Travel package bookings made by users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "package_id": { "type": "string" },
+        "status": { "type": "string", "enum": ["confirmed", "pending", "cancelled"] },
+        "travelers": { "type": "integer" },
+        "total_cost": { "type": "number" },
+        "booking_date": { "type": "string", "format": "date-time" },
+        "start_date": { "type": "string" },
+        "end_date": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "package_id", "status", "travelers", "total_cost"]
+    },
+    "savedTrip": {
+      "title": "Saved Trip",
+      "description": "Custom AI-generated itineraries saved by users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "name": { "type": "string" },
+        "destination_id": { "type": "string" },
+        "itinerary": { "type": "array" },
+        "budget": { "type": "number" },
+        "start_date": { "type": "string" },
+        "end_date": { "type": "string" },
+        "status": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "name", "itinerary", "budget"]
+    },
+    "favorite": {
+      "title": "Favorite",
+      "description": "User's favorited or wishlisted destinations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "destination_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "destination_id"]
+    },
+    "review": {
+      "title": "Review",
+      "description": "User-submitted reviews for destinations and packages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "user_name": { "type": "string" },
+        "user_image": { "type": "string" },
+        "destination_id": { "type": "string" },
+        "package_id": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "user_name", "rating", "comment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "User profile collection"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "booking",
+      "description": "Bookings collection"
+    },
+    "/savedTrips/{tripId}": {
+      "schema": "savedTrip",
+      "description": "Saved AI trips collection"
+    },
+    "/favorites/{favoriteId}": {
+      "schema": "favorite",
+      "description": "User favorites collection"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "review",
+      "description": "Reviews collection"
+    }
+  }
+}

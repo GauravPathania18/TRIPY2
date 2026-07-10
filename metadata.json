@@ -1,0 +1,6 @@
+{
+  "name": "Trippy",
+  "description": "Bespoke full-stack luxury travel planner featuring an interactive 3D Globe centerpiece, predictive climate intelligence, and custom AI itinerary routing with Gemini.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
