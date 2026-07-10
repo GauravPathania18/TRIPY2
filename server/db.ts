@@ -130,6 +130,7 @@ class Database {
   // Helper: Seed Firestore on initial boot with seed data
   private async seedFirestoreAsync() {
     try {
+      if (!firestore) return;
       console.log('[Firestore] Checking if Firestore needs initial seeding...');
       const destSnap = await firestore.collection('destinations').limit(1).get();
       if (destSnap.empty) {
