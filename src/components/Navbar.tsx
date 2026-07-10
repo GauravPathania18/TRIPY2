@@ -173,7 +173,7 @@ export default function Navbar({
                   <span className="flex items-center gap-1.5">
                     {link.label}
                     {link.badge && (
-                      <span className="px-1.5 text-[8px] tracking-wider font-mono bg-cyan-500 text-white dark:bg-cyan-400 dark:text-slate-950 rounded-full flex items-center justify-center font-bold">
+                      <span className="px-1.5 text-[8px] tracking-wider font-mono bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 rounded-full flex items-center justify-center font-extrabold shadow-[0_0_8px_rgba(245,158,11,0.3)]">
                         {link.badge}
                       </span>
                     )}
@@ -213,7 +213,7 @@ export default function Navbar({
                   <button
                     id="user-profile-button"
                     onClick={() => setShowUserDropdown(!showUserDropdown)}
-                    className="flex items-center gap-2 p-1.5 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-slate-900 hover:border-blue-500 dark:hover:border-cyan-400 transition"
+                    className="flex items-center gap-2 p-1.5 rounded-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-slate-900 hover:border-amber-500 dark:hover:border-amber-400 transition"
                   >
                     <img
                       src={user.profile_image || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.name)}`}
@@ -277,10 +277,10 @@ export default function Navbar({
                 <button
                   id="btn-get-started"
                   onClick={() => setTab('login')}
-                  className="px-5 py-2.5 rounded-xl text-sm font-medium bg-slate-900 text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-white/90 shadow-lg shadow-black/10 transition-all flex items-center gap-1.5 group"
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-lg shadow-amber-500/10 transition-all flex items-center gap-1.5 group"
                 >
                   <span>Get Started</span>
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400 dark:text-blue-600 group-hover:rotate-12 transition-transform" />
+                  <Sparkles className="w-3.5 h-3.5 text-slate-950 group-hover:rotate-12 transition-transform" />
                 </button>
               </div>
             )}
@@ -350,7 +350,7 @@ export default function Navbar({
                       </div>
                       <div className="flex items-center gap-2">
                         {link.badge && (
-                          <span className="px-1.5 py-0.5 text-[8px] tracking-wider font-mono bg-cyan-500 text-white dark:bg-cyan-400 dark:text-slate-950 rounded-full font-bold">
+                          <span className="px-1.5 py-0.5 text-[8px] tracking-wider font-mono bg-amber-500 text-slate-950 dark:bg-amber-400 dark:text-slate-950 rounded-full font-extrabold shadow-[0_0_8px_rgba(245,158,11,0.3)]">
                             {link.badge}
                           </span>
                         )}
@@ -370,7 +370,7 @@ export default function Navbar({
                         <img
                           src={user.profile_image || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user.name)}`}
                           alt={user.name}
-                          className="w-10 h-10 rounded-full border border-blue-500/20 object-cover"
+                          className="w-10 h-10 rounded-full border border-amber-500/20 object-cover"
                         />
                         <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-950"></span>
                       </div>
@@ -385,7 +385,7 @@ export default function Navbar({
                           setTab('dashboard');
                           setMobileMenuOpen(false);
                         }}
-                        className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 text-blue-600 dark:text-cyan-400 border border-blue-500/10 dark:border-cyan-400/10 transition-all active:scale-95"
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-amber-500/5 dark:bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/10 dark:border-amber-400/10 transition-all active:scale-95"
                       >
                         <User className="w-3.5 h-3.5" />
                         <span>Workspace</span>
@@ -418,10 +418,10 @@ export default function Navbar({
                         setTab('login');
                         setMobileMenuOpen(false);
                       }}
-                      className="px-4 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-cyan-500 dark:to-blue-600 text-white hover:opacity-95 text-center shadow-lg shadow-blue-500/10 transition-all active:scale-95 flex items-center justify-center gap-1.5"
+                      className="px-4 py-2.5 rounded-xl text-sm font-semibold bg-amber-500 text-slate-950 hover:bg-amber-400 hover:opacity-95 text-center shadow-lg shadow-amber-500/10 transition-all active:scale-95 flex items-center justify-center gap-1.5"
                     >
                       <span>Get Started</span>
-                      <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+                      <Sparkles className="w-3.5 h-3.5 text-slate-950" />
                     </button>
                   </motion.div>
                 )}

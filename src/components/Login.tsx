@@ -90,7 +90,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
           style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80")' }}
         />
         {/* Blue/Teal Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900/40 to-cyan-500/10 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900/40 to-amber-500/10 mix-blend-multiply"></div>
 
         {/* Floating grid patterns */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:16px_16px]"></div>
@@ -103,8 +103,8 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-2 mb-8"
           >
-            <div className="p-3 rounded-2xl bg-blue-600 shadow-xl shadow-blue-500/20">
-              <Compass className="w-6 h-6 text-white" />
+            <div className="p-3 rounded-2xl bg-amber-500 shadow-xl shadow-amber-500/10 text-slate-950">
+              <Compass className="w-6 h-6 text-slate-950" />
             </div>
             <span className="font-display font-bold text-2xl tracking-tight">Trippy</span>
           </motion.div>
@@ -116,7 +116,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
             className="text-4xl md:text-5xl font-display font-medium tracking-tight leading-tight mb-6"
           >
             The future of <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 font-semibold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 font-semibold">
               travel planning
             </span>{' '}
             is here.
@@ -145,7 +145,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
               "The AI recommended a private sunset yacht in South Goa which became our absolute favorite memory!"
             </p>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-medium text-cyan-400">Aditya Sharma</span>
+              <span className="text-xs font-mono font-medium text-amber-400">Aditya Sharma</span>
               <span className="text-[10px] text-slate-400">— Saved 5 Trips</span>
             </div>
           </motion.div>
@@ -155,7 +155,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
       {/* Right Column: Glassmorphic Auth Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-24 relative overflow-hidden bg-slate-50 dark:bg-slate-950">
         {/* Animated ambient blob */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-blue-500/5 to-cyan-500/5 rounded-full filter blur-[80px] pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-amber-500/5 to-amber-500/5 rounded-full filter blur-[80px] pointer-events-none"></div>
 
         <div className="w-full max-w-md relative z-10">
           <div className="text-center mb-8">
@@ -213,7 +213,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white text-sm transition focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400 focus:ring-4 focus:ring-blue-100 dark:focus:ring-cyan-500/5"
+                    className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white text-sm transition focus:outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10"
                   />
                 </div>
               </div>
@@ -229,7 +229,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white text-sm transition focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400 focus:ring-4 focus:ring-blue-100 dark:focus:ring-cyan-500/5"
+                  className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white text-sm transition focus:outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10"
                 />
               </div>
             </div>
@@ -244,7 +244,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
                       setEmail('pathaniagaurav1818@gmail.com');
                       setPassword('admin123');
                     }}
-                    className="text-xs text-blue-600 dark:text-cyan-400 hover:underline"
+                    className="text-xs text-amber-500 hover:underline"
                   >
                     Demo admin?
                   </button>
@@ -258,7 +258,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-11 pr-11 py-3 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white text-sm transition focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400 focus:ring-4 focus:ring-blue-100 dark:focus:ring-cyan-500/5"
+                  className="w-full pl-11 pr-11 py-3 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white text-sm transition focus:outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10"
                 />
                 <button
                   type="button"
@@ -273,7 +273,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
             {isLogin && (
               <div className="flex items-center justify-between text-xs font-medium text-slate-500 dark:text-slate-400 mt-2">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="rounded border-gray-300 dark:border-white/10 text-blue-600 focus:ring-blue-500" />
+                  <input type="checkbox" className="rounded border-gray-300 dark:border-white/10 text-amber-500 focus:ring-amber-500" />
                   <span>Remember Me</span>
                 </label>
                 <button type="button" className="hover:underline">Forgot Password?</button>
@@ -283,7 +283,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-6 py-3 px-4 rounded-xl bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition shadow-lg shadow-blue-500/20 disabled:opacity-50 flex items-center justify-center gap-2 group cursor-pointer"
+              className="w-full mt-6 py-3 px-4 rounded-xl bg-amber-500 text-slate-950 font-bold text-sm hover:bg-amber-400 transition shadow-lg shadow-amber-500/10 disabled:opacity-50 flex items-center justify-center gap-2 group cursor-pointer"
             >
               <span>{loading ? 'Authenticating...' : isLogin ? 'Sign In' : 'Create Account'}</span>
               {!loading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
@@ -297,7 +297,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
                 setIsLogin(!isLogin);
                 setError(null);
               }}
-              className="text-blue-600 dark:text-cyan-400 font-semibold ml-1.5 hover:underline"
+              className="text-amber-500 font-semibold ml-1.5 hover:underline"
             >
               {isLogin ? 'Sign Up' : 'Log In'}
             </button>

@@ -121,7 +121,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans antialiased overflow-x-hidden selection:bg-blue-600 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans antialiased overflow-x-hidden selection:bg-amber-500 selection:text-slate-950 transition-colors duration-300">
       
       {/* Frosted glass header bar */}
       <Navbar
@@ -145,11 +145,11 @@ export default function App() {
               className="relative"
             >
               {/* HERO SECTION */}
-              <section className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-20 bg-white dark:bg-slate-950 overflow-hidden text-left" id="home-hero">
+              <section className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-20 bg-[#050714] overflow-hidden text-left" id="home-hero">
                 {/* Decorative gradients */}
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-600/10 to-cyan-500/10 rounded-full filter blur-[120px] pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-purple-600/5 to-blue-500/5 rounded-full filter blur-[100px] pointer-events-none"></div>
-                <div className="absolute inset-0 bg-[radial-gradient(#1e293b10_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff04_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-tr from-amber-500/10 to-transparent rounded-full filter blur-[140px] pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-indigo-900/30 to-transparent rounded-full filter blur-[120px] pointer-events-none"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
                   
@@ -158,19 +158,20 @@ export default function App() {
                     <motion.div
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-cyan-400 text-xs font-semibold"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/35 text-amber-600 dark:text-amber-400 text-xs font-bold font-mono tracking-wider uppercase shadow-[0_2px_10px_rgba(245,158,11,0.08)]"
                     >
-                      <span>The Future of Premium Travel</span>
+                      <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                      <span>The Future of Bespoke Travel</span>
                     </motion.div>
 
                     <motion.h1
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
-                      className="text-4xl sm:text-6xl font-display font-medium tracking-tight text-slate-900 dark:text-white leading-none"
+                      className="text-4xl sm:text-6xl font-display font-medium tracking-tight text-white leading-none"
                     >
                       Plan Smarter.<br />
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 font-bold">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 font-bold">
                         Travel Better.
                       </span>
                     </motion.h1>
@@ -179,7 +180,7 @@ export default function App() {
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="text-slate-500 dark:text-slate-400 max-w-xl text-base sm:text-lg leading-relaxed font-light"
+                      className="text-slate-400 max-w-xl text-base sm:text-lg leading-relaxed font-light"
                     >
                       Escape the clutter of cookie-cutter packages. Tell us where you want to go, and let our cognitive AI map out personalized routes, estimated budgets, and climate predictions in real-time.
                     </motion.p>
@@ -193,14 +194,14 @@ export default function App() {
                     >
                       <button
                         onClick={() => setTab('ai-planner')}
-                        className="px-6 py-3.5 rounded-2xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition shadow-lg shadow-blue-500/20 flex items-center gap-1.5 cursor-pointer"
+                        className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition shadow-lg shadow-amber-500/20 flex items-center gap-1.5 cursor-pointer"
                       >
                         <span>Consult AI Planner</span>
-                        <Sparkles className="w-4 h-4 text-cyan-300" />
+                        <Sparkles className="w-4 h-4 text-slate-950" />
                       </button>
                       <button
                         onClick={() => setTab('destinations')}
-                        className="px-6 py-3.5 rounded-2xl border border-gray-200 dark:border-white/10 text-slate-700 dark:text-slate-200 font-medium text-sm hover:bg-gray-100 dark:hover:bg-slate-900 transition"
+                        className="px-6 py-3.5 rounded-2xl border border-white/10 text-slate-200 font-medium text-sm hover:bg-white/5 transition"
                       >
                         Explore Masterpieces
                       </button>
@@ -213,13 +214,13 @@ export default function App() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.5, delay: 0.2 }}
-                      className="p-6 sm:p-8 rounded-3xl bg-white/70 dark:bg-slate-900/60 border border-gray-200/50 dark:border-white/5 backdrop-blur-xl shadow-2xl relative"
+                      className="p-6 sm:p-8 rounded-3xl bg-[#0b0e20]/80 border border-white/5 backdrop-blur-xl shadow-2xl relative"
                     >
                       {/* Abstract glass card decorations */}
-                      <div className="absolute -top-10 -right-10 w-24 h-24 bg-cyan-500/10 rounded-full filter blur-xl pointer-events-none"></div>
+                      <div className="absolute -top-10 -right-10 w-24 h-24 bg-amber-500/10 rounded-full filter blur-xl pointer-events-none"></div>
 
                       <div className="flex justify-between items-center mb-6">
-                        <span className="text-[10px] uppercase font-mono tracking-widest text-cyan-500 font-bold">
+                        <span className="text-[10px] uppercase font-mono tracking-widest text-amber-500 font-bold">
                           Quick Draft Console
                         </span>
                         <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
@@ -235,7 +236,7 @@ export default function App() {
                               value={homeDest}
                               onChange={(e) => setHomeDest(e.target.value)}
                               placeholder="e.g. Goa, Tokyo, Switzerland..."
-                              className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none"
+                              className="w-full pl-9 pr-3 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500/50"
                             />
                           </div>
                         </div>
@@ -248,7 +249,7 @@ export default function App() {
                               value={homeBudget}
                               onChange={(e) => setHomeBudget(e.target.value)}
                               placeholder="e.g. 50000"
-                              className="w-full px-3 py-2.5 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none"
+                              className="w-full px-3 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500/50"
                             />
                           </div>
                           <div>
@@ -258,7 +259,7 @@ export default function App() {
                               <select
                                 value={homeDays}
                                 onChange={(e) => setHomeDays(Number(e.target.value))}
-                                className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 rounded-xl text-xs text-slate-800 dark:text-white focus:outline-none"
+                                className="w-full pl-9 pr-3 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500/50"
                               >
                                 <option value={3}>3 Days</option>
                                 <option value={5}>5 Days</option>
@@ -273,7 +274,7 @@ export default function App() {
                             // Route directly to planner
                             setTab('ai-planner');
                           }}
-                          className="w-full py-3 bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-semibold text-xs rounded-xl hover:bg-slate-800 transition flex items-center justify-center gap-1.5 cursor-pointer mt-4"
+                          className="w-full py-3 bg-amber-500 text-slate-950 font-bold text-xs rounded-xl hover:bg-amber-400 transition flex items-center justify-center gap-1.5 cursor-pointer mt-4"
                         >
                           <span>Draft Private Travel Plan</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -328,7 +329,7 @@ export default function App() {
                       
                       {/* Feature 1 */}
                       <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
-                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
+                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-2xl w-fit text-amber-500 mb-6">
                           <Sparkles className="w-6 h-6 animate-pulse" />
                         </div>
                         <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Cognitive AI Routing</h3>
@@ -339,7 +340,7 @@ export default function App() {
 
                       {/* Feature 2 */}
                       <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
-                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
+                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-2xl w-fit text-amber-500 mb-6">
                           <Shield className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Climate Intelligence</h3>
@@ -350,7 +351,7 @@ export default function App() {
 
                       {/* Feature 3 */}
                       <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
-                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
+                        <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-2xl w-fit text-amber-500 mb-6">
                           <RefreshCw className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Cloud Synced Workspace</h3>
@@ -423,7 +424,7 @@ export default function App() {
                 <section className="py-12 md:py-16 bg-slate-50 dark:bg-slate-950 text-left overflow-hidden border-t border-gray-200/30 dark:border-white/5">
                   <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-10">
-                      <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-cyan-400 font-semibold px-3 py-1 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full">
+                      <span className="text-xs font-mono uppercase tracking-widest text-amber-500 font-semibold px-3 py-1 bg-amber-500/5 rounded-full">
                         Real Journeys, Real Stories
                       </span>
                       <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mt-4 mb-3 text-slate-900 dark:text-white">
@@ -464,7 +465,7 @@ export default function App() {
                           href="https://www.reddit.com/r/travel/comments/17q8j9w/just_returned_from_10_days_in_rajasthan_our/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 transition text-[10px] font-mono font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer flex-shrink-0 whitespace-nowrap"
+                          className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500 transition text-[10px] font-mono font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer flex-shrink-0 whitespace-nowrap"
                         >
                           View Thread
                         </a>
@@ -500,7 +501,7 @@ export default function App() {
                           href="https://www.reddit.com/r/backpacking/comments/119sh7q/trekking_in_the_himalayas_lessons_learned/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 transition text-[10px] font-mono font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer flex-shrink-0 whitespace-nowrap"
+                          className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500 transition text-[10px] font-mono font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer flex-shrink-0 whitespace-nowrap"
                         >
                           View Thread
                         </a>
@@ -536,7 +537,7 @@ export default function App() {
                           href="https://www.reddit.com/r/travel/comments/15k6p8u/scenic_trains_in_switzerland_which_are_the_best/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 transition text-[10px] font-mono font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer flex-shrink-0 whitespace-nowrap"
+                          className="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500 transition text-[10px] font-mono font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer flex-shrink-0 whitespace-nowrap"
                         >
                           View Thread
                         </a>
@@ -659,7 +660,7 @@ export default function App() {
                   notifications.map((notif) => (
                     <div key={notif.id} className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl border border-gray-100 dark:border-white/5 text-xs text-slate-500 leading-relaxed font-mono">
                       <p className="font-semibold text-slate-800 dark:text-slate-200 mb-1 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-blue-600 rounded-full shrink-0"></span>
+                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full shrink-0"></span>
                         {notif.title}
                       </p>
                       <p className="font-light">{notif.message}</p>

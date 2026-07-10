@@ -9,7 +9,7 @@ export default function Footer({ setTab }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 text-white border-t border-white/5 py-16 relative overflow-hidden text-left" id="main-footer">
+    <footer className="bg-[#040613] text-white border-t border-amber-500/20 py-16 relative overflow-hidden text-left" id="main-footer">
       {/* Grid Pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:32px_32px]"></div>
 
@@ -21,7 +21,7 @@ export default function Footer({ setTab }: FooterProps) {
             <div className="flex items-center gap-2">
               <TrippyLogo className="w-10 h-10" />
               <div className="flex flex-col leading-none">
-                <span className="font-display font-bold text-xl tracking-tight text-white">Tripy</span>
+                <span className="font-display font-bold text-xl tracking-tight text-white">Trippy</span>
                 <span className="text-[9px] font-mono tracking-widest text-amber-500/80 uppercase font-bold mt-0.5">
                   Premium Guide
                 </span>
@@ -31,7 +31,7 @@ export default function Footer({ setTab }: FooterProps) {
               Crafting premium travel experiences using predictive climate intelligence and advanced AI routing.
             </p>
             <div className="flex gap-2">
-              <span className="text-[10px] uppercase tracking-widest font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-1 rounded">
+              <span className="text-[10px] uppercase tracking-widest font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">
                 Premium Design System
               </span>
             </div>
@@ -39,7 +39,7 @@ export default function Footer({ setTab }: FooterProps) {
 
           {/* Quick Links Column */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest font-semibold">Explore</h4>
+            <h4 className="text-xs font-mono text-amber-400/90 uppercase tracking-widest font-bold">Explore</h4>
             <ul className="space-y-2 text-sm text-slate-400 font-light">
               <li>
                 <button onClick={() => setTab('home')} className="hover:text-amber-400 transition cursor-pointer">
@@ -61,7 +61,7 @@ export default function Footer({ setTab }: FooterProps) {
 
           {/* Technology Column */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest font-semibold">Services</h4>
+            <h4 className="text-xs font-mono text-amber-400/90 uppercase tracking-widest font-bold">Services</h4>
             <ul className="space-y-2 text-sm text-slate-400 font-light">
               <li>
                 <button onClick={() => setTab('ai-planner')} className="hover:text-amber-400 transition cursor-pointer">
@@ -83,7 +83,7 @@ export default function Footer({ setTab }: FooterProps) {
 
           {/* Newsletter Column */}
           <div className="md:col-span-4 space-y-4">
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-widest font-semibold">Weekly Bulletins</h4>
+            <h4 className="text-xs font-mono text-amber-400/90 uppercase tracking-widest font-bold">Weekly Bulletins</h4>
             <p className="text-xs text-slate-400 font-light">
               Join our exclusive club of adventurers for seasonal destination releases.
             </p>
@@ -92,7 +92,7 @@ export default function Footer({ setTab }: FooterProps) {
                 type="email"
                 required
                 placeholder="enter your email..."
-                className="flex-1 px-3.5 py-2.5 bg-slate-900 border border-white/5 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500/50"
+                className="flex-1 px-3.5 py-2.5 bg-slate-900/60 border border-white/5 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500/50"
               />
               <button
                 type="submit"
@@ -107,7 +107,7 @@ export default function Footer({ setTab }: FooterProps) {
 
         {/* Bottom copyright */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
-          <span>&copy; {currentYear} TRIPY INT. ALL RIGHTS RESERVED.</span>
+          <span>&copy; {currentYear} TRIPPY INTERNATIONAL. ALL RIGHTS RESERVED.</span>
           <div className="flex gap-6">
             <a href="#" className="hover:text-slate-300">PRIVACY</a>
             <a href="#" className="hover:text-slate-300">TERMS</a>

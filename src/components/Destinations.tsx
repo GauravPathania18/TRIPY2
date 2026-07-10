@@ -266,29 +266,29 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
               width: 18px;
               height: 18px;
               border-radius: 50%;
-              background: #2563eb;
+              background: #f59e0b;
               border: 3px solid #ffffff;
-              box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+              box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
               cursor: pointer;
               transition: all 0.15s ease-in-out;
             }
             #trippy-budget-slider::-webkit-slider-thumb:hover {
               transform: scale(1.15);
-              box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+              box-shadow: 0 0 14px rgba(245, 158, 11, 0.8);
             }
             #trippy-budget-slider::-moz-range-thumb {
               width: 18px;
               height: 18px;
               border-radius: 50%;
-              background: #2563eb;
+              background: #f59e0b;
               border: 3px solid #ffffff;
-              box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+              box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
               cursor: pointer;
               transition: all 0.15s ease-in-out;
             }
             #trippy-budget-slider::-moz-range-thumb:hover {
               transform: scale(1.15);
-              box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+              box-shadow: 0 0 14px rgba(245, 158, 11, 0.8);
             }
           `}} />
 
@@ -301,7 +301,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search country, city, or coast..."
-                className="w-full pl-14 pr-5 py-4 bg-[#030712] border border-slate-800/60 rounded-2xl text-base text-white placeholder-slate-500 transition focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                className="w-full pl-14 pr-5 py-4 bg-[#030712] border border-slate-800/60 rounded-2xl text-base text-white placeholder-slate-500 transition focus:outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10"
               />
             </div>
 
@@ -313,7 +313,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                   onClick={() => setActiveCategory(cat)}
                   className={`px-6 py-2.5 rounded-xl text-xs font-mono tracking-wider uppercase transition-all cursor-pointer ${
                     activeCategory === cat
-                      ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20'
+                      ? 'bg-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/10'
                       : 'bg-[#0e172a] hover:bg-slate-800 border border-slate-800/40 text-slate-400 hover:text-slate-200'
                   }`}
                 >
@@ -326,7 +326,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
             <div className="space-y-3">
               <div className="flex justify-between items-center text-xs font-mono tracking-wider text-slate-400">
                 <span>MAX BUDGET</span>
-                <span className="text-cyan-400 font-bold text-sm">₹{maxBudget.toLocaleString('en-IN')}</span>
+                <span className="text-amber-400 font-bold text-sm">₹{maxBudget.toLocaleString('en-IN')}</span>
               </div>
               <div className="relative flex items-center h-6">
                 <input
@@ -338,7 +338,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                   value={maxBudget}
                   onChange={(e) => setMaxBudget(Number(e.target.value))}
                   style={{
-                    background: `linear-gradient(to right, #2563eb 0%, #2563eb ${((maxBudget - 15000) / (300000 - 15000)) * 100}%, #ffffff ${((maxBudget - 15000) / (300000 - 15000)) * 100}%, #ffffff 100%)`
+                    background: `linear-gradient(to right, #f59e0b 0%, #f59e0b ${((maxBudget - 15000) / (300000 - 15000)) * 100}%, #ffffff ${((maxBudget - 15000) / (300000 - 15000)) * 100}%, #ffffff 100%)`
                   }}
                   className="w-full h-[6px] rounded-full appearance-none cursor-pointer focus:outline-none transition-all"
                 />
@@ -365,7 +365,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                       activeTravelStyle === style.value
                         ? style.value === 'all'
                           ? 'bg-emerald-600 text-white font-semibold shadow-md shadow-emerald-500/10'
-                          : 'bg-blue-600 text-white font-semibold shadow-md shadow-blue-500/10'
+                          : 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10'
                         : 'bg-[#0e172a] hover:bg-slate-800 border border-slate-800/40 text-slate-300'
                     }`}
                   >
@@ -393,7 +393,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                       activeClimate === climate.value
                         ? climate.value === 'all'
                           ? 'bg-orange-600 text-white font-semibold shadow-md shadow-orange-500/10'
-                          : 'bg-blue-600 text-white font-semibold shadow-md shadow-blue-500/10'
+                          : 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10'
                         : 'bg-[#0e172a] hover:bg-slate-800 border border-slate-800/40 text-slate-300'
                     }`}
                   >
@@ -405,17 +405,17 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
 
             {/* Gemini AI Discover Destination Assistant */}
             {searchQuery.trim() && (
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-cyan-500/10 border border-blue-500/20 dark:border-cyan-500/20 shadow-inner mt-2">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-600/10 to-amber-700/10 border border-amber-500/20 shadow-inner mt-2">
                 <div className="flex items-start gap-3">
                   <span className="flex h-2.5 w-2.5 relative mt-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
                   </span>
                   <div className="text-sm">
                     <span className="font-semibold text-white block sm:inline">Can't find your dream destination?</span>{' '}
                     <span className="text-slate-300 block sm:inline">
                       Let Gemini AI dynamically explore & build a premium, persisted guide for{' '}
-                      <span className="font-semibold text-cyan-400">"{searchQuery}"</span>.
+                      <span className="font-semibold text-amber-400">"{searchQuery}"</span>.
                     </span>
                     {aiDiscoverError && (
                       <p className="text-xs text-red-400 mt-1.5 font-mono">{aiDiscoverError}</p>
@@ -425,7 +425,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                 <button
                   onClick={handleAIDiscover}
                   disabled={aiDiscoverLoading}
-                  className="flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl transition shadow-md hover:shadow-lg hover:shadow-indigo-500/20 active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer self-start md:self-auto"
+                  className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 rounded-xl transition shadow-md hover:shadow-lg hover:shadow-amber-500/20 active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer self-start md:self-auto"
                 >
                   {aiDiscoverLoading ? (
                     <>
@@ -514,14 +514,14 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                     {/* Bottom overlay texts */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                       <div className="flex items-center gap-1 text-xs text-slate-300 font-mono mb-1">
-                        <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                        <MapPin className="w-3.5 h-3.5 text-amber-400" />
                         <span>{dest.city}, {dest.country}</span>
                       </div>
                       <h3 className="text-xl font-display font-medium mb-1 tracking-tight">{dest.name}</h3>
                       
                       <div className="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono text-slate-300">
                         <span>Best: {dest.best_season}</span>
-                        <span className="text-cyan-400 font-bold">{dest.budget_range.split('-')[0]}</span>
+                        <span className="text-amber-400 font-bold">{dest.budget_range.split('-')[0]}</span>
                       </div>
                     </div>
                   </div>
@@ -569,7 +569,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                     {/* Detail title inside banner */}
                     <div className="absolute bottom-6 left-6 text-white">
                       <div className="flex items-center gap-1.5 text-xs text-slate-300 font-mono mb-1">
-                        <MapPin className="w-4 h-4 text-cyan-400" />
+                        <MapPin className="w-4 h-4 text-amber-400" />
                         <span>{selectedDest.city}, {selectedDest.country}</span>
                       </div>
                       <h2 className="text-3xl sm:text-4xl font-display font-semibold tracking-tight">{selectedDest.name}</h2>
@@ -621,12 +621,12 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                       {/* Local Cuisine (Mocked) */}
                       <div>
                         <h3 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                          <Utensils className="w-3.5 h-3.5 text-cyan-400" />
+                          <Utensils className="w-3.5 h-3.5 text-amber-500" />
                           <span>Local Gastronomy Selection</span>
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           {['Goan Spiced Fish Curry', 'Todd Vinegar Pork Vindaloo', 'Feni & Cashew Drinks', 'Sweet Bebinca Cake', 'Steaming hot local Momos', 'Rawa Fried Pomfret'].map((food) => (
-                            <span key={food} className="px-3 py-1 bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/15 rounded-lg text-xs font-medium text-blue-600 dark:text-cyan-400">
+                            <span key={food} className="px-3 py-1 bg-amber-500/10 border border-amber-500/20 rounded-lg text-xs font-semibold text-amber-500">
                               {food}
                             </span>
                           ))}
@@ -639,21 +639,21 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                     <div className="md:col-span-4 space-y-4">
                       
                       {/* Weather widget */}
-                      <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-900 dark:text-cyan-400">
+                      <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-500">
                         <div className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase mb-1">
                           <CloudSun className="w-4 h-4 text-amber-500" />
                           <span>Real-Time Weather</span>
                         </div>
                         {weatherLoading ? (
                           <div className="flex items-center gap-2 text-xs font-mono text-slate-500 mt-1">
-                            <div className="w-3.5 h-3.5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-3.5 h-3.5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin"></div>
                             <span>Fetching live weather...</span>
                           </div>
                         ) : weatherData ? (
                           <div className="space-y-1 mt-1 text-slate-800 dark:text-slate-100">
                             <div className="flex items-center gap-2">
-                              <span className="text-2xl font-bold font-mono text-blue-600 dark:text-cyan-300">{weatherData.temp}°C</span>
-                              <span className="text-xs font-mono font-medium capitalize px-2 py-0.5 rounded-full bg-blue-100 dark:bg-cyan-500/15 text-blue-700 dark:text-cyan-300">
+                              <span className="text-2xl font-bold font-mono text-amber-500">{weatherData.temp}°C</span>
+                              <span className="text-xs font-mono font-medium capitalize px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-500">
                                 {weatherData.description}
                               </span>
                             </div>
@@ -715,7 +715,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                           setSelectedDest(null);
                           setTab('packages');
                         }}
-                        className="w-full py-3.5 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 font-semibold text-sm transition shadow-lg shadow-blue-500/15 flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full py-3.5 rounded-2xl bg-amber-500 text-slate-950 hover:bg-amber-400 font-bold text-sm transition shadow-lg shadow-amber-500/10 flex items-center justify-center gap-2 cursor-pointer"
                       >
                         <Compass className="w-4 h-4 animate-spin" />
                         <span>Explore Curated Tours</span>

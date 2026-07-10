@@ -215,7 +215,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
   };
 
   // Recharts Chart Colors
-  const COLORS = ['#2563EB', '#06B6D4', '#F59E0B', '#10B981'];
+  const COLORS = ['#f59e0b', '#d97706', '#b45309', '#facc15'];
 
   const getChartData = () => {
     if (!result?.budget_breakdown) return [];
@@ -243,7 +243,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
               {!user ? (
                 <div className="p-4 rounded-xl border border-dashed border-gray-200 dark:border-white/10 text-center text-xs text-slate-400">
                   <p className="mb-2">Sign in to save and sync your travel plans.</p>
-                  <button onClick={() => setTab('login')} className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">
+                  <button onClick={() => setTab('login')} className="text-amber-500 font-semibold hover:underline">
                     Login Now
                   </button>
                 </div>
@@ -278,19 +278,19 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
               <div className="space-y-2.5">
                 <button
                   onClick={() => handleQuickStarter('Japan', 140000, 7, 2, ['Culture', 'Anime', 'Food'])}
-                  className="w-full text-left p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-blue-500/5 dark:hover:bg-cyan-500/5 border border-gray-100 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300 transition"
+                  className="w-full text-left p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-amber-500/5 border border-gray-100 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300 transition"
                 >
                   🌸 Tokyo Cyber-Punk Trail (7d, ₹1.4L)
                 </button>
                 <button
                   onClick={() => handleQuickStarter('Goa Coastline', 50000, 5, 2, ['Beach', 'Food', 'Nightlife'])}
-                  className="w-full text-left p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-blue-500/5 dark:hover:bg-cyan-500/5 border border-gray-100 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300 transition"
+                  className="w-full text-left p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-amber-500/5 border border-gray-100 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300 transition"
                 >
                   🏝️ Private South Goa Sunset (5d, ₹50k)
                 </button>
                 <button
                   onClick={() => handleQuickStarter('Switzerland', 280000, 8, 2, ['Adventure', 'Culture'])}
-                  className="w-full text-left p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-blue-500/5 dark:hover:bg-cyan-500/5 border border-gray-100 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300 transition"
+                  className="w-full text-left p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 hover:bg-amber-500/5 border border-gray-100 dark:border-white/5 text-xs text-slate-600 dark:text-slate-300 transition"
                 >
                   🏔️ Alpine Scenic Express (8d, ₹2.8L)
                 </button>
@@ -357,7 +357,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
                         placeholder="e.g. Manali, Japan..."
-                        className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 text-xs rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-blue-600"
+                        className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 text-xs rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
                       />
                     </div>
                   </div>
@@ -426,7 +426,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                           onClick={() => handleInterestToggle(opt)}
                           className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                             selected
-                              ? 'bg-blue-600 text-white'
+                              ? 'bg-amber-500 text-slate-950 font-semibold shadow-md'
                               : 'bg-gray-50 dark:bg-slate-950 text-slate-500 hover:bg-gray-100 border border-gray-200/50 dark:border-white/10'
                           }`}
                         >
@@ -444,16 +444,16 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                     value={customPrompt}
                     onChange={(e) => setCustomPrompt(e.target.value)}
                     placeholder="e.g. Include vegetarian Goan curry options, focus on beach yoga or private historical temple guides..."
-                    className="w-full p-4 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 text-xs sm:text-sm rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-blue-600 resize-none h-20"
+                    className="w-full p-4 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 text-xs sm:text-sm rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 resize-none h-20"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-500/15 disabled:opacity-50 flex items-center justify-center gap-2 group cursor-pointer"
+                  className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-xl shadow-lg shadow-amber-500/10 disabled:opacity-50 flex items-center justify-center gap-2 group cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4 animate-spin text-cyan-300" />
+                  <Sparkles className="w-4 h-4 animate-spin text-slate-950" />
                   <span>{loading ? 'Consulting Travel Nodes...' : 'Generate Custom Travel Plan'}</span>
                 </button>
               </form>
@@ -462,9 +462,9 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
             {/* Spinner Progress bar during AI generation */}
             {loading && (
               <div className="bg-slate-900 text-white rounded-3xl p-12 text-center border border-white/5 shadow-2xl space-y-4">
-                <div className="w-12 h-12 border-4 border-blue-600 border-t-cyan-400 rounded-full animate-spin mx-auto"></div>
+                <div className="w-12 h-12 border-4 border-amber-500 border-t-amber-300 rounded-full animate-spin mx-auto"></div>
                 <h3 className="text-lg font-display font-medium tracking-tight mt-4">Consulting Travel Intelligence</h3>
-                <p className="text-xs font-mono text-cyan-400 max-w-sm mx-auto h-8 animate-pulse">
+                <p className="text-xs font-mono text-amber-400 max-w-sm mx-auto h-8 animate-pulse">
                   {loadingSteps[loadingStep]}
                 </p>
               </div>
@@ -480,7 +480,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                 {/* Result header card */}
                 <div className="bg-white dark:bg-slate-900 border border-gray-200/50 dark:border-white/5 rounded-3xl p-6 sm:p-8 shadow-md flex flex-col sm:flex-row gap-6 justify-between items-start sm:items-center text-left">
                   <div>
-                    <span className="text-[10px] font-mono tracking-widest text-blue-600 dark:text-cyan-400 font-bold uppercase block mb-1">
+                    <span className="text-[10px] font-mono tracking-widest text-amber-500 font-bold uppercase block mb-1">
                       Personalized Travel Plan Ready
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-display font-medium text-slate-900 dark:text-white tracking-tight">
@@ -497,7 +497,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                       className={`flex-1 sm:flex-none px-5 py-3 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-1.5 cursor-pointer ${
                         saveSuccess
                           ? 'bg-emerald-500 text-white'
-                          : 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/15'
+                          : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold shadow-lg shadow-amber-500/10'
                       }`}
                     >
                       <Heart className={`w-4 h-4 ${saveSuccess ? 'fill-white' : ''}`} />
@@ -523,7 +523,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                         </div>
                       ) : weatherData ? (
                         <div className="text-right">
-                          <span className="text-sm font-bold font-mono text-blue-600 dark:text-cyan-300">{weatherData.temp}°C</span>
+                          <span className="text-sm font-bold font-mono text-amber-500">{weatherData.temp}°C</span>
                           <span className="text-[10px] font-mono text-slate-400 block capitalize leading-none mt-0.5">{weatherData.description}</span>
                         </div>
                       ) : null}
@@ -543,7 +543,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
 
                   {/* Packing suggestions card */}
                   <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/50 dark:border-white/5 shadow-sm space-y-4">
-                    <div className="flex items-center gap-2.5 text-xs font-mono text-blue-600 dark:text-cyan-400 uppercase font-semibold">
+                    <div className="flex items-center gap-2.5 text-xs font-mono text-amber-500 uppercase font-semibold">
                       <ClipboardList className="w-5 h-5" />
                       <span>Custom Packing List</span>
                     </div>
@@ -570,7 +570,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                         <div key={day.day} className="relative space-y-2">
                           
                           {/* Dot connector */}
-                          <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-blue-600 text-white border border-white dark:border-slate-900 flex items-center justify-center font-mono font-bold text-[8px]">
+                          <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-amber-500 text-slate-950 border border-white dark:border-slate-900 flex items-center justify-center font-mono font-bold text-[8px]">
                             {day.day}
                           </div>
 
@@ -581,7 +581,7 @@ export default function AIPlanner({ setTab, user }: AIPlannerProps) {
                           <ul className="space-y-2.5 pl-3">
                             {(day.activities || []).map((act: string, j: number) => (
                               <li key={j} className="text-sm text-slate-500 dark:text-slate-300 leading-relaxed font-light flex items-start gap-2">
-                                <span className="text-cyan-400 font-bold mt-0.5 shrink-0">•</span>
+                                <span className="text-amber-500 font-bold mt-0.5 shrink-0">•</span>
                                 <span>{act}</span>
                               </li>
                             ))}

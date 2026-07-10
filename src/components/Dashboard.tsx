@@ -177,7 +177,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
           </div>
 
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-cyan-400 text-xs font-mono font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono font-medium mb-4">
               <span>Workspace Control Board</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-display font-medium tracking-tight mb-2">
@@ -218,14 +218,14 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
             {/* Active Bookings list with Boarding Pass aesthetic inside */}
             <div className="bg-white dark:bg-slate-900 border border-gray-200/50 dark:border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl text-left">
               <h2 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-blue-500" />
+                <Calendar className="w-5 h-5 text-amber-500" />
                 <span>Active Boarding Tickets</span>
               </h2>
 
               {bookings.length === 0 ? (
                 <div className="p-8 text-center rounded-2xl border-2 border-dashed border-gray-200 dark:border-white/5 text-slate-400 text-sm">
                   <p className="mb-4">You have no active luxury package reservations yet.</p>
-                  <button onClick={() => setTab('packages')} className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs transition">
+                  <button onClick={() => setTab('packages')} className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition">
                     Explore Curated Tours
                   </button>
                 </div>
@@ -244,7 +244,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
                           </div>
                           <div>
                             <span className="font-mono text-[9px] text-slate-400 block">TOTAL PAID</span>
-                            <span className="font-bold text-blue-600 dark:text-cyan-400">₹{book.total_cost?.toLocaleString()}</span>
+                            <span className="font-bold text-amber-400">₹{book.total_cost?.toLocaleString()}</span>
                           </div>
                           <div className="flex gap-2">
                             <button
@@ -319,7 +319,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
             {/* Budget charts Recharts */}
             <div className="bg-white dark:bg-slate-900 border border-gray-200/50 dark:border-white/5 rounded-3xl p-6 sm:p-8 shadow-sm text-left">
               <h2 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-blue-500" />
+                <CreditCard className="w-5 h-5 text-amber-500" />
                 <span>Financial Budget Analytics</span>
               </h2>
 
@@ -330,7 +330,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
                     <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} fontClass="font-mono" />
                     <YAxis stroke="#94a3b8" fontSize={10} fontClass="font-mono" />
                     <Tooltip formatter={(value: any) => `₹${value.toLocaleString()}`} />
-                    <Bar dataKey="Cost" fill="#2563EB" radius={[4, 4, 0, 0]} barSize={32} />
+                    <Bar dataKey="Cost" fill="#f59e0b" radius={[4, 4, 0, 0]} barSize={32} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -381,7 +381,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
                   notifications.map((notif) => (
                     <div key={notif.id} className="p-3 bg-slate-50 dark:bg-slate-950/40 rounded-xl border border-gray-100 dark:border-white/5 text-[11px] font-mono leading-relaxed text-slate-500 dark:text-slate-300">
                       <p className="text-slate-700 dark:text-slate-200 mb-1 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-blue-600 rounded-full shrink-0"></span>
+                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full shrink-0"></span>
                         {notif.title}
                       </p>
                       <p className="font-light">{notif.message}</p>
@@ -394,7 +394,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
             {/* Profile editor */}
             <div className="bg-white dark:bg-slate-900 border border-gray-200/50 dark:border-white/5 rounded-3xl p-5 shadow-sm">
               <h3 className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-1.5">
-                <User className="w-4 h-4 text-blue-500" />
+                <User className="w-4 h-4 text-amber-500" />
                 <span>Update Account Info</span>
               </h3>
 
@@ -430,7 +430,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
                 <button
                   type="submit"
                   disabled={profileLoading}
-                  className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-lg transition"
+                  className="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg transition"
                 >
                   {profileLoading ? 'Saving Info...' : 'Update Settings'}
                 </button>

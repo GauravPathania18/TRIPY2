@@ -241,7 +241,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                   <div className="p-6 sm:p-8">
                     <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 mb-4">
                       <span className="flex items-center gap-1">
-                        <User className="w-3.5 h-3.5 text-blue-500" />
+                        <User className="w-3.5 h-3.5 text-amber-500" />
                         {featuredBlog.author_name}
                       </span>
                       <span>•</span>
@@ -250,12 +250,12 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                         {new Date(featuredBlog.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                       <span>•</span>
-                      <span className="uppercase tracking-wider text-blue-600 dark:text-cyan-400 font-semibold bg-blue-500/5 px-2 py-0.5 rounded">
+                      <span className="uppercase tracking-wider text-amber-500 font-bold bg-amber-500/5 px-2 py-0.5 rounded">
                         {featuredBlog.category.replace('_', ' ')}
                       </span>
                     </div>
 
-                    <h2 className="text-2xl sm:text-3xl font-display font-medium text-slate-900 dark:text-white tracking-tight leading-tight group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition mb-4">
+                    <h2 className="text-2xl sm:text-3xl font-display font-medium text-slate-900 dark:text-white tracking-tight leading-tight group-hover:text-amber-500 transition mb-4">
                       {featuredBlog.title}
                     </h2>
                     <p className="text-slate-500 dark:text-slate-300 text-sm sm:text-base font-light leading-relaxed mb-6 line-clamp-3">
@@ -263,7 +263,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                     </p>
 
                     <div className="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-white/5 text-xs text-slate-400 font-mono">
-                      <span className="flex items-center gap-1.5 text-blue-600 dark:text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform">
+                      <span className="flex items-center gap-1.5 text-amber-500 font-semibold group-hover:translate-x-1 transition-transform">
                         Read full column <ChevronRight className="w-4 h-4" />
                       </span>
                       <div className="flex gap-4">
@@ -294,10 +294,10 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                         />
                       </div>
                       <div className="p-5">
-                        <span className="text-[10px] font-mono tracking-wider text-blue-600 dark:text-cyan-400 uppercase bg-blue-500/5 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-mono tracking-wider text-amber-500 uppercase bg-amber-500/5 px-2 py-0.5 rounded">
                           {blog.category.replace('_', ' ')}
                         </span>
-                        <h3 className="text-lg font-display font-medium text-slate-900 dark:text-white mt-3 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition">
+                        <h3 className="text-lg font-display font-medium text-slate-900 dark:text-white mt-3 line-clamp-2 group-hover:text-amber-500 transition">
                           {blog.title}
                         </h3>
                       </div>
@@ -325,7 +325,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                 <p className="text-sm text-slate-300 leading-relaxed font-light mb-6 relative z-10">
                   Are you a professional travel writer, digital nomad or culinary anthropologist? Join our elite contributor list to publish your stories to Trippy members.
                 </p>
-                <button className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold relative z-10 transition">
+                <button className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold relative z-10 transition">
                   Apply for Contributor Account
                 </button>
               </div>
@@ -341,7 +341,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                         href="https://www.reddit.com/r/JapanTravel/comments/12yby9k/guide_on_how_to_book_and_experience_ryokans/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-semibold text-slate-800 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400 transition cursor-pointer"
+                        className="text-sm font-semibold text-slate-800 dark:text-white hover:text-amber-500 transition cursor-pointer"
                       >
                         Unlocking Kyoto's Private Ryokans
                       </a>
@@ -355,7 +355,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                         href="https://www.reddit.com/r/travel/comments/15k6p8u/scenic_trains_in_switzerland_which_are_the_best/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-semibold text-slate-800 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400 transition cursor-pointer"
+                        className="text-sm font-semibold text-slate-800 dark:text-white hover:text-amber-500 transition cursor-pointer"
                       >
                         The Ultimate Swiss Train Scenic Routes
                       </a>
@@ -369,7 +369,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                         href="https://www.quora.com/Which-is-better-North-Goa-or-South-Goa"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-semibold text-slate-800 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400 transition cursor-pointer"
+                        className="text-sm font-semibold text-slate-800 dark:text-white hover:text-amber-500 transition cursor-pointer"
                       >
                         Why We Prefer South Goa over the North
                       </a>
@@ -419,11 +419,11 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
                     
-                    <div className="absolute bottom-6 left-6 right-12 text-white">
-                      <span className="px-2.5 py-1 rounded bg-blue-600 text-[10px] font-mono tracking-widest uppercase font-bold">
+                    <div className="absolute bottom-6 left-6 right-12 text-slate-950">
+                      <span className="px-2.5 py-1 rounded bg-amber-500 text-[10px] font-mono tracking-widest uppercase font-bold">
                         {selectedBlog.category.replace('_', ' ')}
                       </span>
-                      <h2 className="text-2xl sm:text-4xl font-display font-semibold mt-3 tracking-tight leading-tight">
+                      <h2 className="text-2xl sm:text-4xl font-display font-semibold mt-3 tracking-tight leading-tight text-white">
                         {selectedBlog.title}
                       </h2>
                     </div>
@@ -448,7 +448,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                       {/* Comment threads section */}
                       <div className="pt-8 border-t border-gray-200 dark:border-white/5 space-y-6">
                         <h3 className="text-lg font-display font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                          <MessageSquare className="w-5 h-5 text-blue-500" />
+                          <MessageSquare className="w-5 h-5 text-amber-500" />
                           <span>Comments & Notes ({comments.length})</span>
                         </h3>
 
@@ -461,7 +461,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                               <div key={comm.id} className="p-4 bg-slate-50 dark:bg-slate-950/40 rounded-xl border border-gray-100 dark:border-white/5">
                                 <div className="flex justify-between items-center text-xs font-mono text-slate-400 mb-1">
                                   <span className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1">
-                                    <User className="w-3 h-3 text-cyan-400" /> {comm.user_name}
+                                    <User className="w-3 h-3 text-amber-400" /> {comm.user_name}
                                   </span>
                                   <span>Now</span>
                                 </div>
@@ -479,12 +479,12 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                               value={newComment}
                               onChange={(e) => setNewComment(e.target.value)}
                               placeholder="Write a travel insight..."
-                              className="flex-1 px-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 text-sm rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400"
+                              className="flex-1 px-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-gray-200 dark:border-white/10 text-sm rounded-xl text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
                             />
                             <button
                               type="submit"
                               disabled={commentLoading}
-                              className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                              className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer"
                             >
                               <Send className="w-3.5 h-3.5" />
                               <span>{commentLoading ? 'Posting...' : 'Post'}</span>
@@ -493,7 +493,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                         ) : (
                           <div className="p-4 rounded-xl border border-dashed border-gray-200 dark:border-white/10 text-center text-xs text-slate-400">
                             Please{' '}
-                            <button onClick={() => { setSelectedBlog(null); setTab('login'); }} className="text-blue-600 dark:text-cyan-400 font-semibold hover:underline">
+                            <button onClick={() => { setSelectedBlog(null); setTab('login'); }} className="text-amber-500 font-semibold hover:underline">
                               Sign In
                             </button>{' '}
                             to join the travel discussions.
@@ -517,7 +517,7 @@ export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
                               href={selectedBlog.source_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold text-xs transition duration-200 text-center block cursor-pointer"
+                              className="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition duration-200 text-center block cursor-pointer"
                             >
                               View Original Discussion
                             </a>
