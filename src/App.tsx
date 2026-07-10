@@ -399,6 +399,9 @@ export default function App() {
                       <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">AI recommendations</span>
                     </div>
                   </div>
+                  <p className="text-center text-[10px] sm:text-xs font-mono tracking-wider text-slate-400 dark:text-slate-500 mt-10 max-w-lg mx-auto opacity-70 px-4">
+                    *Note: These statistics represent simulated platform metrics and mock benchmarks for demonstration purposes.
+                  </p>
                 </section>
               </ScrollReveal>
 
