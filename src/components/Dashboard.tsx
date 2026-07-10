@@ -27,6 +27,8 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
 
   useEffect(() => {
     if (user) {
+      setName(user.name || '');
+      setEmail(user.email || '');
       fetchDashboardData();
     }
   }, [user]);
@@ -109,7 +111,7 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
     setProfileSuccess(false);
 
     try {
-      const res = await fetch('/api/users/profile', {
+      const res = await fetch('/api/auth/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -122,8 +124,8 @@ export default function Dashboard({ setTab, user, onProfileUpdate }: DashboardPr
         return;
       }
       const data = await res.json();
-      if (res.ok) {
-        onProfileUpdate(data);
+      if (res.ok && data.user) {
+        onProfileUpdate(data.user);
         setProfileSuccess(true);
         setTimeout(() => setProfileSuccess(false), 3000);
       }

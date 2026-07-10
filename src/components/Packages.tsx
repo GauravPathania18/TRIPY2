@@ -6,9 +6,10 @@ import { TourPackage, BookingStatus } from '../types';
 interface PackagesProps {
   setTab: (tab: string) => void;
   user: any | null;
+  isHome?: boolean;
 }
 
-export default function Packages({ setTab, user }: PackagesProps) {
+export default function Packages({ setTab, user, isHome = false }: PackagesProps) {
   const [packages, setPackages] = useState<TourPackage[]>([]);
   const [selectedPkg, setSelectedPkg] = useState<TourPackage | null>(null);
   const [expandedDay, setExpandedDay] = useState<number | null>(1);
@@ -76,7 +77,7 @@ export default function Packages({ setTab, user }: PackagesProps) {
   };
 
   return (
-    <div className="py-24 bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-100" id="packages-module">
+    <div className={`${isHome ? 'py-12 md:py-16' : 'py-24 min-h-screen'} bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100`} id="packages-module">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Module Title */}
@@ -471,7 +472,7 @@ export default function Packages({ setTab, user }: PackagesProps) {
                       <div className="bg-slate-900 text-white p-5 border-b border-dashed border-gray-200 dark:border-slate-800 relative">
                         <div className="flex justify-between items-center mb-4">
                           <span className="text-[10px] font-mono tracking-widest text-cyan-400 uppercase font-bold">
-                            TripWise boarding ticket
+                            Trippy boarding ticket
                           </span>
                           <span className="px-2 py-0.5 rounded bg-emerald-500 text-[8px] font-mono font-bold text-slate-950 uppercase">
                             Confirmed

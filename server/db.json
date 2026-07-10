@@ -5,7 +5,8 @@
       "name": "Liam Thorne",
       "email": "pathaniagaurav1818@gmail.com",
       "role": "admin",
-      "created_at": "2026-07-09T08:52:34.040Z"
+      "created_at": "2026-07-09T08:52:34.040Z",
+      "profile_image": "https://lh3.googleusercontent.com/a/ACg8ocLbZ6wBOhpzDxF4ywYFJ3-TqCyUQtlTE4YiIzCkN1Jg3b52kQ=s96-c"
     }
   ],
   "passwords": {
@@ -21,7 +22,7 @@
       "latitude": 15.2993,
       "longitude": 74.124,
       "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹15,000 - ₹25,000",
+      "budget_range": "₹35,000 - ₹65,000",
       "best_season": "October - March",
       "category": "beach",
       "is_featured": true,
@@ -38,7 +39,7 @@
       "latitude": 32.2396,
       "longitude": 77.1887,
       "image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹20,000 - ₹30,000",
+      "budget_range": "₹45,000 - ₹75,000",
       "best_season": "December - June",
       "category": "mountains",
       "is_featured": true,
@@ -55,7 +56,7 @@
       "latitude": 32.01,
       "longitude": 77.315,
       "image_url": "https://images.unsplash.com/photo-1486915309851-b0cc1f8a0084?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹18,000 - ₹28,000",
+      "budget_range": "₹30,000 - ₹55,000",
       "best_season": "March - June",
       "category": "adventure",
       "is_featured": false,
@@ -72,7 +73,7 @@
       "latitude": 26.9124,
       "longitude": 75.7873,
       "image_url": "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹25,000 - ₹40,000",
+      "budget_range": "₹75,000 - ₹1,40,000",
       "best_season": "November - February",
       "category": "family",
       "is_featured": true,
@@ -89,7 +90,7 @@
       "latitude": 35.6762,
       "longitude": 139.6503,
       "image_url": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹80,000 - ₹1,50,000",
+      "budget_range": "₹2,20,000 - ₹3,80,000",
       "best_season": "March - May & Oct - Nov",
       "category": "adventure",
       "is_featured": true,
@@ -106,7 +107,7 @@
       "latitude": 46.0207,
       "longitude": 7.7491,
       "image_url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹1,50,000 - ₹2,50,000",
+      "budget_range": "₹3,20,000 - ₹5,40,000",
       "best_season": "December - April & June - Sep",
       "category": "mountains",
       "is_featured": true,
@@ -123,7 +124,7 @@
       "latitude": -8.4095,
       "longitude": 115.1889,
       "image_url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
-      "budget_range": "₹40,000 - ₹70,000",
+      "budget_range": "₹85,000 - ₹1,60,000",
       "best_season": "April - October",
       "category": "beach",
       "is_featured": true,
@@ -138,7 +139,7 @@
       "name": "Himalayan Adventure Trek",
       "description": "An exhilarating high-altitude trek through pristine pine trails, glacier crossings, and majestic alpine lakes in Solang and Parvati Valley.",
       "destination_id": "dest-manali",
-      "price": 28000,
+      "price": 54000,
       "duration": 7,
       "difficulty": "hard",
       "inclusions": [
@@ -223,7 +224,7 @@
       "name": "Luxury Beach Escape to Goa",
       "description": "A premium, relaxing escape featuring private beach cottages, guided sunset yacht tours, spiced organic plantation lunches, and candle-lit seafood dinners.",
       "destination_id": "dest-goa",
-      "price": 22000,
+      "price": 58000,
       "duration": 5,
       "difficulty": "easy",
       "inclusions": [
@@ -294,7 +295,7 @@
       "name": "Royal Heritage Tour of Rajasthan",
       "description": "Immerse yourself in imperial history with private palace stays, desert safaris, local artisan workshops, and exquisite Mewari cuisine.",
       "destination_id": "dest-rajasthan",
-      "price": 35000,
+      "price": 115000,
       "duration": 10,
       "difficulty": "moderate",
       "inclusions": [
@@ -360,7 +361,7 @@
       "user_image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80",
       "destination_id": "dest-goa",
       "rating": 5,
-      "comment": "TripWise made planning our anniversary trip to Goa so smooth. The AI recommended a private sunset yacht in South Goa which became our absolute favorite memory! Highly recommended!",
+      "comment": "Trippy made planning our anniversary trip to Goa so smooth. The AI recommended a private sunset yacht in South Goa which became our absolute favorite memory! Highly recommended!",
       "created_at": "2026-07-04T08:52:34.040Z"
     },
     {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, Sparkles, MapPin, Users, Calendar, ArrowRight, Shield, RefreshCw, Star, Heart, FileText, CheckCircle2 } from 'lucide-react';
 import Navbar from './components/Navbar';
@@ -11,6 +11,23 @@ import AIPlanner from './components/AIPlanner';
 import Dashboard from './components/Dashboard';
 import Footer from './components/Footer';
 import AnimatedCounter from './components/AnimatedCounter';
+
+interface ScrollRevealProps {
+  children: React.ReactNode;
+}
+
+function ScrollReveal({ children }: ScrollRevealProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function App() {
   const [currentTab, setTab] = useState('home');
@@ -26,8 +43,8 @@ export default function App() {
 
   useEffect(() => {
     // Check if user session exists in local storage
-    const savedUser = localStorage.getItem('tripwise_user');
-    const savedToken = localStorage.getItem('tripwise_token');
+    const savedUser = localStorage.getItem('trippy_user');
+    const savedToken = localStorage.getItem('trippy_token');
     if (savedUser && savedToken) {
       try {
         const parsedUser = JSON.parse(savedUser);
@@ -86,21 +103,21 @@ export default function App() {
   const handleAuthSuccess = (authUser: any, authToken: string) => {
     setUser(authUser);
     setToken(authToken);
-    localStorage.setItem('tripwise_user', JSON.stringify(authUser));
-    localStorage.setItem('tripwise_token', authToken);
+    localStorage.setItem('trippy_user', JSON.stringify(authUser));
+    localStorage.setItem('trippy_token', authToken);
   };
 
   const handleLogout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('tripwise_user');
-    localStorage.removeItem('tripwise_token');
+    localStorage.removeItem('trippy_user');
+    localStorage.removeItem('trippy_token');
     setTab('home');
   };
 
   const handleProfileUpdate = (updatedUser: any) => {
     setUser(updatedUser);
-    localStorage.setItem('tripwise_user', JSON.stringify(updatedUser));
+    localStorage.setItem('trippy_user', JSON.stringify(updatedUser));
   };
 
   return (
@@ -269,138 +286,153 @@ export default function App() {
               </section>
 
               {/* TRUSTED BRANDS MARQUEE (Infinite scrolling marquee) */}
-              <section className="py-8 bg-slate-100 dark:bg-slate-900 border-y border-gray-200/50 dark:border-white/5 relative overflow-hidden" id="marquee-section">
-                <div className="flex gap-16 items-center whitespace-nowrap animate-[marquee_25s_linear_infinite] opacity-60 dark:opacity-40 select-none">
-                  <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
-                    <Compass className="w-4 h-4" /> GOOGLE TRAVEL
+              <ScrollReveal>
+                <section className="py-8 bg-slate-100 dark:bg-slate-900 border-y border-gray-200/50 dark:border-white/5 relative overflow-hidden" id="marquee-section">
+                  <div className="flex gap-16 items-center whitespace-nowrap animate-[marquee_25s_linear_infinite] opacity-60 dark:opacity-40 select-none">
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
+                      <Compass className="w-4 h-4" /> GOOGLE TRAVEL
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
+                      <Compass className="w-4 h-4" /> AIRBNB
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
+                      <Compass className="w-4 h-4" /> BOOKING.COM
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
+                      <Compass className="w-4 h-4" /> TRIPADVISOR
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
+                      <Compass className="w-4 h-4" /> AMAZON WEB SERVICES
+                    </div>
+                    <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
+                      <Compass className="w-4 h-4" /> GOOGLE MAPS
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
-                    <Compass className="w-4 h-4" /> AIRBNB
-                  </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
-                    <Compass className="w-4 h-4" /> BOOKING.COM
-                  </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
-                    <Compass className="w-4 h-4" /> TRIPADVISOR
-                  </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
-                    <Compass className="w-4 h-4" /> AMAZON WEB SERVICES
-                  </div>
-                  <div className="flex items-center gap-2 text-sm font-semibold tracking-widest text-slate-600 dark:text-slate-400">
-                    <Compass className="w-4 h-4" /> GOOGLE MAPS
-                  </div>
-                </div>
-              </section>
+                </section>
+              </ScrollReveal>
 
               {/* AI FEATURES SECTION (Bento styled grid) */}
-              <section className="py-24 bg-white dark:bg-slate-950 text-left" id="features-grid">
-                <div className="max-w-7xl mx-auto px-6">
-                  <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mb-4 text-slate-900 dark:text-white">
-                      Supercharged Travel Intel
-                    </h2>
-                    <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-light">
-                      Forget spreadsheets. Our integrated modular suites solve every step of your travel timeline.
-                    </p>
+              <ScrollReveal>
+                <section className="py-12 md:py-16 bg-white dark:bg-slate-950 text-left" id="features-grid">
+                  <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-10">
+                      <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mb-3 text-slate-900 dark:text-white">
+                        Supercharged Travel Intel
+                      </h2>
+                      <p className="text-slate-500 max-w-xl mx-auto text-sm sm:text-base font-light">
+                        Forget spreadsheets. Our integrated modular suites solve every step of your travel timeline.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                      
+                      {/* Feature 1 */}
+                      <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
+                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
+                          <Sparkles className="w-6 h-6 animate-pulse" />
+                        </div>
+                        <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Cognitive AI Routing</h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-light">
+                          Predicts optimal day-by-day sightseeing timelines, transport systems, and cost parameters using Gemini models.
+                        </p>
+                      </div>
+
+                      {/* Feature 2 */}
+                      <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
+                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
+                          <Shield className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Climate Intelligence</h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-light">
+                          Cross-checks seasonal forecasts, packing requirements, and optimal visiting windows instantly.
+                        </p>
+                      </div>
+
+                      {/* Feature 3 */}
+                      <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
+                        <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
+                          <RefreshCw className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Cloud Synced Workspace</h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-light">
+                          Save favorite travel plans, retrieve boarding passes offline, and update visitor checklists instantly.
+                        </p>
+                      </div>
+
+                    </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    {/* Feature 1 */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
-                      <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
-                        <Sparkles className="w-6 h-6 animate-pulse" />
-                      </div>
-                      <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Cognitive AI Routing</h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-light">
-                        Predicts optimal day-by-day sightseeing timelines, transport systems, and cost parameters using Gemini models.
-                      </p>
-                    </div>
-
-                    {/* Feature 2 */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
-                      <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
-                        <Shield className="w-6 h-6" />
-                      </div>
-                      <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Climate Intelligence</h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-light">
-                        Cross-checks seasonal forecasts, packing requirements, and optimal visiting windows instantly.
-                      </p>
-                    </div>
-
-                    {/* Feature 3 */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-gray-100 dark:border-white/5 hover:-translate-y-1 transition duration-300">
-                      <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-2xl w-fit text-blue-600 dark:text-cyan-400 mb-6">
-                        <RefreshCw className="w-6 h-6" />
-                      </div>
-                      <h3 className="text-xl font-display font-medium text-slate-900 dark:text-white mb-2">Cloud Synced Workspace</h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-light">
-                        Save favorite travel plans, retrieve boarding passes offline, and update visitor checklists instantly.
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-              </section>
+                </section>
+              </ScrollReveal>
 
               {/* INTERACTIVE 3D GLOBE CENTERPIECE */}
-              <GlobeSection />
+              <ScrollReveal>
+                <GlobeSection />
+              </ScrollReveal>
 
               {/* LIVE METRIC COUNTERS SECTION */}
-              <section className="py-24 bg-white dark:bg-slate-950 border-t border-gray-200/30 dark:border-white/5">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-                  <div className="text-center space-y-2">
-                    <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
-                      <AnimatedCounter value={20} suffix="K+" />
-                    </span>
-                    <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">Trips Synced</span>
+              <ScrollReveal>
+                <section className="py-12 md:py-16 bg-white dark:bg-slate-950 border-t border-gray-200/30 dark:border-white/5">
+                  <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div className="text-center space-y-2">
+                      <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
+                        <AnimatedCounter value={20} suffix="K+" />
+                      </span>
+                      <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">Trips Synced</span>
+                    </div>
+                    <div className="text-center space-y-2">
+                      <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
+                        <AnimatedCounter value={150} suffix="+" />
+                      </span>
+                      <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">Countries Sourced</span>
+                    </div>
+                    <div className="text-center space-y-2">
+                      <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
+                        <AnimatedCounter value={98} suffix="%" />
+                      </span>
+                      <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">Satisfaction</span>
+                    </div>
+                    <div className="text-center space-y-2">
+                      <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
+                        <AnimatedCounter value={5} suffix="M+" />
+                      </span>
+                      <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">AI recommendations</span>
+                    </div>
                   </div>
-                  <div className="text-center space-y-2">
-                    <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
-                      <AnimatedCounter value={150} suffix="+" />
-                    </span>
-                    <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">Countries Sourced</span>
-                  </div>
-                  <div className="text-center space-y-2">
-                    <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
-                      <AnimatedCounter value={98} suffix="%" />
-                    </span>
-                    <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">Satisfaction</span>
-                  </div>
-                  <div className="text-center space-y-2">
-                    <span className="text-3xl sm:text-5xl font-display font-bold text-slate-900 dark:text-white block font-mono">
-                      <AnimatedCounter value={5} suffix="M+" />
-                    </span>
-                    <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">AI recommendations</span>
-                  </div>
-                </div>
-              </section>
+                </section>
+              </ScrollReveal>
 
               {/* CONTINUOUS SCROLLING SECTIONS */}
-              <div id="home-destinations" className="border-t border-gray-200/30 dark:border-white/5">
-                <Destinations setTab={setTab} user={user} />
-              </div>
-              <div id="home-packages" className="border-t border-gray-200/30 dark:border-white/5">
-                <Packages setTab={setTab} user={user} />
-              </div>
-              <div id="home-blogs" className="border-t border-gray-200/30 dark:border-white/5">
-                <Blogs setTab={setTab} user={user} />
-              </div>
+              <ScrollReveal>
+                <div id="home-destinations" className="border-t border-gray-200/30 dark:border-white/5">
+                  <Destinations setTab={setTab} user={user} isHome={true} />
+                </div>
+              </ScrollReveal>
+              <ScrollReveal>
+                <div id="home-packages" className="border-t border-gray-200/30 dark:border-white/5">
+                  <Packages setTab={setTab} user={user} isHome={true} />
+                </div>
+              </ScrollReveal>
+              <ScrollReveal>
+                <div id="home-blogs" className="border-t border-gray-200/30 dark:border-white/5">
+                  <Blogs setTab={setTab} user={user} isHome={true} />
+                </div>
+              </ScrollReveal>
 
               {/* TESTIMONIAL FEED */}
-              <section className="py-24 bg-slate-50 dark:bg-slate-950 text-left overflow-hidden border-t border-gray-200/30 dark:border-white/5">
-                <div className="max-w-7xl mx-auto px-6">
-                  <div className="text-center mb-16">
-                    <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-cyan-400 font-semibold px-3 py-1 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full">
-                      Real Journeys, Real Stories
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mt-4 mb-4 text-slate-900 dark:text-white">
-                      Verified Traveler Experience Logs
-                    </h2>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto font-light">
-                      Real experiences shared by active members who navigated the world using our curated travel packages.
-                    </p>
-                  </div>
+              <ScrollReveal>
+                <section className="py-12 md:py-16 bg-slate-50 dark:bg-slate-950 text-left overflow-hidden border-t border-gray-200/30 dark:border-white/5">
+                  <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center mb-10">
+                      <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-cyan-400 font-semibold px-3 py-1 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full">
+                        Real Journeys, Real Stories
+                      </span>
+                      <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mt-4 mb-3 text-slate-900 dark:text-white">
+                        Verified Traveler Experience Logs
+                      </h2>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto font-light">
+                        Real experiences shared by active members who navigated the world using our curated travel packages.
+                      </p>
+                    </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {/* Testimonial 1 */}
@@ -513,6 +545,7 @@ export default function App() {
                   </div>
                 </div>
               </section>
+            </ScrollReveal>
 
               {/* FOOTER */}
               <Footer setTab={setTab} />

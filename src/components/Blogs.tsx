@@ -94,9 +94,10 @@ const renderContent = (content: string) => {
 interface BlogsProps {
   setTab: (tab: string) => void;
   user: any | null;
+  isHome?: boolean;
 }
 
-export default function Blogs({ setTab, user }: BlogsProps) {
+export default function Blogs({ setTab, user, isHome = false }: BlogsProps) {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
   const [comments, setComments] = useState<BlogComment[]>([]);
@@ -190,7 +191,7 @@ export default function Blogs({ setTab, user }: BlogsProps) {
   const listBlogs = blogs.slice(1);
 
   return (
-    <div className="py-24 bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-100" id="blogs-magazine">
+    <div className={`${isHome ? 'py-12 md:py-16' : 'py-24 min-h-screen'} bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100`} id="blogs-magazine">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -322,7 +323,7 @@ export default function Blogs({ setTab, user }: BlogsProps) {
                 
                 <h3 className="text-xl font-display font-medium mb-4 relative z-10">Featured Columnist</h3>
                 <p className="text-sm text-slate-300 leading-relaxed font-light mb-6 relative z-10">
-                  Are you a professional travel writer, digital nomad or culinary anthropologist? Join our elite contributor list to publish your stories to TripWise members.
+                  Are you a professional travel writer, digital nomad or culinary anthropologist? Join our elite contributor list to publish your stories to Trippy members.
                 </p>
                 <button className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold relative z-10 transition">
                   Apply for Contributor Account

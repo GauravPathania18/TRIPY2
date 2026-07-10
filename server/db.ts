@@ -228,13 +228,49 @@ class Database {
     return user;
   }
 
+  findOrCreateGoogleUser(name: string, email: string, photoURL?: string): User {
+    let user = this.getUserByEmail(email);
+    if (!user) {
+      const id = 'user-' + Math.random().toString(36).substr(2, 9);
+      user = {
+        id,
+        name: name || email.split('@')[0],
+        email,
+        role: UserRole.USER,
+        profile_image: photoURL || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name || email)}`,
+        created_at: new Date().toISOString()
+      };
+      this.data.users.push(user);
+      this.data.passwords[id] = 'google-sso-managed';
+      this.save();
+      
+      // Asynchronously save to Cloud Firestore
+      this.saveToFirestore('users', id, user);
+    } else {
+      if (photoURL && !user.profile_image) {
+        user.profile_image = photoURL;
+        this.save();
+        this.saveToFirestore('users', user.id, user);
+      }
+    }
+    return user;
+  }
+
   verifyPassword(userId: string, passwordText: string): boolean {
     return this.data.passwords[userId] === passwordText;
   }
 
-  updateProfile(userId: string, updates: Partial<Pick<User, 'name' | 'phone' | 'profile_image'>>): User {
+  updateProfile(userId: string, updates: Partial<Pick<User, 'name' | 'email' | 'phone' | 'profile_image'>>): User {
     const idx = this.data.users.findIndex(u => u.id === userId);
     if (idx === -1) throw new Error('User not found');
+    
+    if (updates.email && updates.email.toLowerCase() !== this.data.users[idx].email.toLowerCase()) {
+      const existing = this.getUserByEmail(updates.email);
+      if (existing) {
+        throw new Error('Email is already registered by another account');
+      }
+    }
+
     this.data.users[idx] = { ...this.data.users[idx], ...updates };
     this.save();
     

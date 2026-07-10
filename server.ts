@@ -107,6 +107,20 @@ app.post('/api/auth/login', (req, res) => {
   res.json({ user, token });
 });
 
+app.post('/api/auth/google', (req, res) => {
+  const { name, email, photoURL } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required' });
+  }
+  try {
+    const user = db.findOrCreateGoogleUser(name, email, photoURL);
+    const token = `${user.id}:${user.role}`;
+    res.json({ user, token });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message || 'Google authentication failed' });
+  }
+});
+
 app.get('/api/auth/me', (req, res) => {
   const user = getAuthUser(req);
   if (!user) {
@@ -120,9 +134,9 @@ app.put('/api/auth/profile', (req, res) => {
   if (!user) {
     return res.status(401).json({ error: 'Not authenticated' });
   }
-  const { name, phone, profile_image } = req.body;
+  const { name, email, phone, profile_image } = req.body;
   try {
-    const updated = db.updateProfile(user.id, { name, phone, profile_image });
+    const updated = db.updateProfile(user.id, { name, email, phone, profile_image });
     res.json({ user: updated });
   } catch (err: any) {
     res.status(400).json({ error: err.message || 'Update failed' });

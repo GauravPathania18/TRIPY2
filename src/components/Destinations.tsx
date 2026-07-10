@@ -6,9 +6,10 @@ import { Destination, DestinationCategory } from '../types';
 interface DestinationsProps {
   setTab: (tab: string) => void;
   user: any | null;
+  isHome?: boolean;
 }
 
-export default function Destinations({ setTab, user }: DestinationsProps) {
+export default function Destinations({ setTab, user, isHome = false }: DestinationsProps) {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -233,7 +234,7 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
   });
 
   return (
-    <div className="py-24 bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-100" id="destinations-explorer">
+    <div className={`${isHome ? 'py-12 md:py-16' : 'py-24 min-h-screen'} bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100`} id="destinations-explorer">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Page Header */}
@@ -256,31 +257,64 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
         </div>
 
         {/* Filter Toolbar */}
-        <div className="bg-white dark:bg-slate-900 border border-gray-200/50 dark:border-white/5 rounded-3xl p-6 shadow-xl shadow-gray-200/5 dark:shadow-none mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            
+        <div className="bg-[#0b1329] border border-slate-800/80 rounded-[28px] p-8 shadow-2xl mb-12 text-white" id="trippy-filter-panel">
+          {/* Custom Slider Thumb Styles */}
+          <style dangerouslySetInnerHTML={{__html: `
+            #trippy-budget-slider::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              background: #2563eb;
+              border: 3px solid #ffffff;
+              box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+              cursor: pointer;
+              transition: all 0.15s ease-in-out;
+            }
+            #trippy-budget-slider::-webkit-slider-thumb:hover {
+              transform: scale(1.15);
+              box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+            }
+            #trippy-budget-slider::-moz-range-thumb {
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              background: #2563eb;
+              border: 3px solid #ffffff;
+              box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+              cursor: pointer;
+              transition: all 0.15s ease-in-out;
+            }
+            #trippy-budget-slider::-moz-range-thumb:hover {
+              transform: scale(1.15);
+              box-shadow: 0 0 14px rgba(37, 99, 235, 0.8);
+            }
+          `}} />
+
+          <div className="flex flex-col gap-6">
             {/* Search Input */}
-            <div className="lg:col-span-4 relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <div className="relative">
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search country, city, or coast..."
-                className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-white/5 rounded-2xl text-sm text-slate-800 dark:text-white transition focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/5"
+                className="w-full pl-14 pr-5 py-4 bg-[#030712] border border-slate-800/60 rounded-2xl text-base text-white placeholder-slate-500 transition focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
               />
             </div>
 
             {/* Category selection */}
-            <div className="lg:col-span-5 flex flex-wrap gap-1.5 justify-start lg:justify-center">
+            <div className="flex flex-wrap gap-2.5">
               {['all', 'beach', 'mountains', 'adventure', 'family'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider uppercase transition-all cursor-pointer ${
+                  className={`px-6 py-2.5 rounded-xl text-xs font-mono tracking-wider uppercase transition-all cursor-pointer ${
                     activeCategory === cat
-                      ? 'bg-blue-600 text-white shadow-md shadow-blue-500/15'
-                      : 'bg-gray-50 dark:bg-slate-950 border border-gray-200/50 dark:border-white/5 text-slate-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800'
+                      ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20'
+                      : 'bg-[#0e172a] hover:bg-slate-800 border border-slate-800/40 text-slate-400 hover:text-slate-200'
                   }`}
                 >
                   {cat}
@@ -289,29 +323,35 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
             </div>
 
             {/* Budget Range Slider */}
-            <div className="lg:col-span-3">
-              <div className="flex justify-between items-center text-xs font-mono text-slate-400 mb-2">
+            <div className="space-y-3">
+              <div className="flex justify-between items-center text-xs font-mono tracking-wider text-slate-400">
                 <span>MAX BUDGET</span>
-                <span className="text-blue-600 dark:text-cyan-400 font-semibold">₹{maxBudget.toLocaleString()}</span>
+                <span className="text-cyan-400 font-bold text-sm">₹{maxBudget.toLocaleString('en-IN')}</span>
               </div>
-              <input
-                type="range"
-                min="15000"
-                max="300000"
-                step="5000"
-                value={maxBudget}
-                onChange={(e) => setMaxBudget(Number(e.target.value))}
-                className="w-full accent-blue-600 cursor-pointer"
-              />
+              <div className="relative flex items-center h-6">
+                <input
+                  id="trippy-budget-slider"
+                  type="range"
+                  min="15000"
+                  max="300000"
+                  step="5000"
+                  value={maxBudget}
+                  onChange={(e) => setMaxBudget(Number(e.target.value))}
+                  style={{
+                    background: `linear-gradient(to right, #2563eb 0%, #2563eb ${((maxBudget - 15000) / (300000 - 15000)) * 100}%, #ffffff ${((maxBudget - 15000) / (300000 - 15000)) * 100}%, #ffffff 100%)`
+                  }}
+                  className="w-full h-[6px] rounded-full appearance-none cursor-pointer focus:outline-none transition-all"
+                />
+              </div>
             </div>
 
             {/* Row Divider */}
-            <div className="lg:col-span-12 border-t border-gray-100 dark:border-white/5 my-1"></div>
+            <div className="border-t border-slate-800/80 my-1"></div>
 
             {/* Travel Style Selector */}
-            <div className="lg:col-span-6 flex flex-col sm:flex-row sm:items-center gap-3">
-              <span className="text-xs font-mono text-slate-400 uppercase tracking-wider whitespace-nowrap">Travel Style:</span>
-              <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
+              <span className="w-32 flex-shrink-0 text-xs font-mono text-slate-400 uppercase tracking-widest">Travel Style:</span>
+              <div className="flex flex-wrap gap-2.5">
                 {[
                   { value: 'all', label: 'All Styles' },
                   { value: 'luxury', label: 'Luxury ✨' },
@@ -321,10 +361,12 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
                   <button
                     key={style.value}
                     onClick={() => setActiveTravelStyle(style.value)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                    className={`px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                       activeTravelStyle === style.value
-                        ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-500/15'
-                        : 'bg-gray-50 dark:bg-slate-950 border border-gray-200/50 dark:border-white/5 text-slate-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800'
+                        ? style.value === 'all'
+                          ? 'bg-emerald-600 text-white font-semibold shadow-md shadow-emerald-500/10'
+                          : 'bg-blue-600 text-white font-semibold shadow-md shadow-blue-500/10'
+                        : 'bg-[#0e172a] hover:bg-slate-800 border border-slate-800/40 text-slate-300'
                     }`}
                   >
                     {style.label}
@@ -334,23 +376,25 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
             </div>
 
             {/* Climate Selector */}
-            <div className="lg:col-span-6 flex flex-col sm:flex-row sm:items-center gap-3">
-              <span className="text-xs font-mono text-slate-400 uppercase tracking-wider whitespace-nowrap">Climate Zone:</span>
-              <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
+              <span className="w-32 flex-shrink-0 text-xs font-mono text-slate-400 uppercase tracking-widest">Climate Zone:</span>
+              <div className="flex flex-wrap gap-2.5">
                 {[
                   { value: 'all', label: 'All Climates' },
                   { value: 'tropical', label: 'Tropical 🌴' },
                   { value: 'alpine', label: 'Alpine 🏔️' },
                   { value: 'moderate', label: 'Moderate 🌤️' },
-                  { value: 'desert', label: 'Desert 🏜️' }
+                  { value: 'desert', label: 'Desert 🌵' }
                 ].map((climate) => (
                   <button
                     key={climate.value}
                     onClick={() => setActiveClimate(climate.value)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                    className={`px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                       activeClimate === climate.value
-                        ? 'bg-orange-600 text-white shadow-sm shadow-orange-500/15'
-                        : 'bg-gray-50 dark:bg-slate-950 border border-gray-200/50 dark:border-white/5 text-slate-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800'
+                        ? climate.value === 'all'
+                          ? 'bg-orange-600 text-white font-semibold shadow-md shadow-orange-500/10'
+                          : 'bg-blue-600 text-white font-semibold shadow-md shadow-blue-500/10'
+                        : 'bg-[#0e172a] hover:bg-slate-800 border border-slate-800/40 text-slate-300'
                     }`}
                   >
                     {climate.label}
@@ -361,20 +405,20 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
 
             {/* Gemini AI Discover Destination Assistant */}
             {searchQuery.trim() && (
-              <div className="lg:col-span-12 flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-cyan-500/10 border border-blue-500/20 dark:border-cyan-500/20 shadow-inner mt-2">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-cyan-500/10 border border-blue-500/20 dark:border-cyan-500/20 shadow-inner mt-2">
                 <div className="flex items-start gap-3">
                   <span className="flex h-2.5 w-2.5 relative mt-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
                   </span>
                   <div className="text-sm">
-                    <span className="font-semibold text-slate-800 dark:text-slate-100 block sm:inline">Can't find your dream destination?</span>{' '}
-                    <span className="text-slate-500 dark:text-slate-400 block sm:inline">
+                    <span className="font-semibold text-white block sm:inline">Can't find your dream destination?</span>{' '}
+                    <span className="text-slate-300 block sm:inline">
                       Let Gemini AI dynamically explore & build a premium, persisted guide for{' '}
-                      <span className="font-semibold text-blue-600 dark:text-cyan-400">"{searchQuery}"</span>.
+                      <span className="font-semibold text-cyan-400">"{searchQuery}"</span>.
                     </span>
                     {aiDiscoverError && (
-                      <p className="text-xs text-red-500 mt-1.5 font-mono">{aiDiscoverError}</p>
+                      <p className="text-xs text-red-400 mt-1.5 font-mono">{aiDiscoverError}</p>
                     )}
                   </div>
                 </div>
@@ -396,7 +440,6 @@ export default function Destinations({ setTab, user }: DestinationsProps) {
                 </button>
               </div>
             )}
-
           </div>
         </div>
 

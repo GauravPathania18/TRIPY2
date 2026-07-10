@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Lock, User, Eye, EyeOff, Sparkles, ArrowRight, Compass } from 'lucide-react';
+import { signInWithGoogle } from '../firebase';
 
 interface LoginProps {
   onAuthSuccess: (user: any, token: string) => void;
@@ -43,6 +44,42 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const googleUser = await signInWithGoogle();
+      if (!googleUser || !googleUser.email) {
+        throw new Error('Could not retrieve email from Google Account.');
+      }
+      
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: googleUser.displayName,
+          email: googleUser.email,
+          photoURL: googleUser.photoURL
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Google sign-in failed on the server.');
+      }
+      onAuthSuccess(data.user, data.token);
+      setTab('dashboard');
+    } catch (err: any) {
+      console.error(err);
+      if (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request' || err.message?.includes('popup')) {
+        setError('Popup blocked or closed. In this preview iframe, please use the standard login with "Demo admin?" credentials or open the app in a new tab.');
+      } else {
+        setError(err.message || 'Google Sign-In failed.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex" id="login-split-page">
       {/* Left Column: Stunning Cinematic Travel Landscape */}
@@ -69,7 +106,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
             <div className="p-3 rounded-2xl bg-blue-600 shadow-xl shadow-blue-500/20">
               <Compass className="w-6 h-6 text-white" />
             </div>
-            <span className="font-display font-bold text-2xl tracking-tight">TripWise</span>
+            <span className="font-display font-bold text-2xl tracking-tight">Trippy</span>
           </motion.div>
 
           <motion.h2
@@ -141,20 +178,12 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
             </motion.div>
           )}
 
-          {/* Google SSO simulated */}
+          {/* Google SSO */}
           <button
-            onClick={() => {
-              // Simulated google auth success
-              onAuthSuccess({
-                id: 'google-user-1',
-                name: 'Gaurav Pathania',
-                email: 'pathaniagaurav1818@gmail.com',
-                role: 'user',
-                created_at: new Date().toISOString()
-              }, 'google-user-1:user');
-              setTab('dashboard');
-            }}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 dark:border-white/10 rounded-xl bg-white dark:bg-slate-900 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800 transition shadow-sm mb-6"
+            type="button"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 dark:border-white/10 rounded-xl bg-white dark:bg-slate-900 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800 transition shadow-sm mb-6 disabled:opacity-50 cursor-pointer"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="#EA4335" d="M12 5.04c1.66 0 3.12.57 4.29 1.69l3.19-3.19C17.5 1.7 14.97 1 12 1 7.28 1 3.32 3.73 1.5 7.72l3.77 2.92C6.18 7.33 8.87 5.04 12 5.04z" />
@@ -162,7 +191,7 @@ export default function Login({ onAuthSuccess, setTab }: LoginProps) {
               <path fill="#FBBC05" d="M5.27 14.28c-.24-.72-.38-1.49-.38-2.28s.14-1.56.38-2.28L1.5 6.8C.54 8.71 0 10.8 0 13s.54 4.29 1.5 6.2l3.77-2.92z" />
               <path fill="#34A853" d="M12 23c3.24 0 5.97-1.07 7.96-2.92l-3.76-2.92c-1.1.74-2.52 1.18-4.2 1.18-3.13 0-5.82-2.29-6.73-5.6l-3.77 2.92C3.32 20.27 7.28 23 12 23z" />
             </svg>
-            <span>Continue with Google</span>
+            <span>{loading ? 'Connecting...' : 'Continue with Google'}</span>
           </button>
 
           <div className="relative my-6 flex items-center justify-center">
