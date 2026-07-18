@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'motion/react';
 import { Globe, CloudSun, MapPin, Plane, BookOpen, AlertCircle, Sparkles } from 'lucide-react';
+import { fetchWithRetry } from '../utils/api';
 
 interface CountryData {
   id: string;
@@ -378,7 +379,7 @@ export default function GlobeSection() {
             : selectedCountry.name;
           const lat = selectedCountry.lat;
           const lon = selectedCountry.lng;
-          const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}&lat=${lat}&lon=${lon}`);
+          const res = await fetchWithRetry(`/api/weather?city=${encodeURIComponent(city)}&lat=${lat}&lon=${lon}`);
           if (res.ok) {
             const data = await res.json();
             setWeatherData(data);
@@ -421,10 +422,10 @@ export default function GlobeSection() {
     const fetchRealCoordinates = async () => {
       try {
         console.log("Background geocoding: Fetching real-time country coordinates from proxy...");
-        let res = await fetch('/api/proxy/countries');
+        let res = await fetchWithRetry('/api/proxy/countries');
         if (!res.ok) {
           console.log("Proxy failed, trying direct restcountries fallback...");
-          res = await fetch('https://restcountries.com/v3.1/all');
+          res = await fetchWithRetry('https://restcountries.com/v3.1/all');
         }
         if (!res.ok) throw new Error(`HTTP error ${res.status}`);
         const data = await res.json();

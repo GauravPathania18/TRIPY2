@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, MapPin, Star, CloudSun, Calendar, CreditCard, Heart, Eye, ArrowLeft, Utensils, Compass } from 'lucide-react';
 import { Destination, DestinationCategory } from '../types';
+import { fetchWithRetry } from '../utils/api';
+import MapModal from './MapModal';
 
 interface DestinationsProps {
   setTab: (tab: string) => void;
@@ -17,6 +19,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
   const [activeTravelStyle, setActiveTravelStyle] = useState<string>('all');
   const [activeClimate, setActiveClimate] = useState<string>('all');
   const [selectedDest, setSelectedDest] = useState<Destination | null>(null);
+  const [mapTargetDest, setMapTargetDest] = useState<Destination | null>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [favLoading, setFavLoading] = useState<Record<string, boolean>>({});
 
@@ -151,7 +154,7 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
 
   const fetchDestinations = async () => {
     try {
-      const res = await fetch('/api/destinations');
+      const res = await fetchWithRetry('/api/destinations');
       const data = await res.json();
       setDestinations(data);
     } catch (err) {
@@ -502,14 +505,30 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                       )}
                     </div>
 
-                    {/* Favorite Button (Heart) */}
-                    <button
-                      onClick={(e) => handleToggleFavorite(dest.id, e)}
-                      disabled={isLoading}
-                      className="absolute top-4 right-4 p-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/25 backdrop-blur-md text-white hover:text-red-500 transition active:scale-95 disabled:opacity-50"
-                    >
-                      <Heart className={`w-4 h-4 ${isFavorited ? 'fill-red-500 text-red-500' : ''}`} />
-                    </button>
+                    {/* Action Buttons */}
+                    <div className="absolute top-4 right-4 flex gap-1.5 z-10">
+                      {/* Pin on Map Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setMapTargetDest(dest);
+                        }}
+                        className="p-2 rounded-lg bg-white/15 hover:bg-white/25 border border-white/25 backdrop-blur-md text-white hover:text-amber-400 transition active:scale-95"
+                        title="Pin on Map"
+                      >
+                        <MapPin className="w-4 h-4" />
+                      </button>
+
+                      {/* Favorite Button (Heart) */}
+                      <button
+                        onClick={(e) => handleToggleFavorite(dest.id, e)}
+                        disabled={isLoading}
+                        className="p-2 rounded-lg bg-white/15 hover:bg-white/25 border border-white/25 backdrop-blur-md text-white hover:text-red-500 transition active:scale-95 disabled:opacity-50"
+                        title="Toggle Favorite"
+                      >
+                        <Heart className={`w-4 h-4 ${isFavorited ? 'fill-red-500 text-red-500' : ''}`} />
+                      </button>
+                    </div>
 
                     {/* Bottom overlay texts */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
@@ -709,6 +728,17 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                         <span className="text-sm font-semibold text-slate-800 dark:text-white block">{selectedDest.budget_range}</span>
                       </div>
 
+                      {/* Pin on Map Action in Modal */}
+                      <button
+                        onClick={() => {
+                          setMapTargetDest(selectedDest);
+                        }}
+                        className="w-full py-3.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-100 border border-gray-200 dark:border-white/5 font-semibold text-sm transition flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <MapPin className="w-4 h-4 text-amber-500" />
+                        <span>Pin on Map</span>
+                      </button>
+
                       {/* Travel Action */}
                       <button
                         onClick={() => {
@@ -727,6 +757,16 @@ export default function Destinations({ setTab, user, isHome = false }: Destinati
                 </div>
               </motion.div>
             </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Interactive Map Modal Overlay */}
+        <AnimatePresence>
+          {mapTargetDest && (
+            <MapModal
+              destination={mapTargetDest}
+              onClose={() => setMapTargetDest(null)}
+            />
           )}
         </AnimatePresence>
 
