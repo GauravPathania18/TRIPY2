@@ -168,7 +168,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                       setExpandedDay(1);
                       setBookingSuccess(null);
                     }}
-                    className="px-6 py-3 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 text-sm font-medium transition cursor-pointer"
+                    className="px-6 py-3 rounded-xl bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 text-sm font-medium transition cursor-pointer"
                   >
                     View Daily Travel Plan
                   </button>
@@ -184,7 +184,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                       setStartDate(nextWeek.toISOString().split('T')[0]);
                       setEndDate(returnWeek.toISOString().split('T')[0]);
                     }}
-                    className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition shadow-lg shadow-blue-500/15 cursor-pointer flex items-center gap-1.5"
+                    className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-bold transition shadow-lg shadow-amber-500/10 cursor-pointer flex items-center gap-1.5"
                   >
                     <span>Book Private Session</span>
                     <ArrowRight className="w-4 h-4" />
@@ -213,7 +213,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                 {/* Header bar */}
                 <div className="p-6 border-b border-gray-200/50 dark:border-white/5 flex justify-between items-center bg-gray-50 dark:bg-slate-950">
                   <div>
-                    <span className="text-[10px] font-mono tracking-widest text-blue-600 dark:text-cyan-400 font-bold uppercase block mb-1">
+                    <span className="text-[10px] font-mono tracking-widest text-amber-500 font-bold uppercase block mb-1">
                       Detailed Expedition Timeline
                     </span>
                     <h2 className="text-xl sm:text-2xl font-display font-medium text-slate-900 dark:text-white truncate">
@@ -231,7 +231,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                 <div className="overflow-y-auto p-6 sm:p-8 space-y-8 flex-1">
                   
                   {/* Package Quick Description banner */}
-                  <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/10 text-sm text-slate-600 dark:text-slate-300 font-light leading-relaxed">
+                  <div className="p-5 rounded-2xl bg-amber-500/5 border border-amber-500/10 text-sm text-slate-600 dark:text-slate-300 font-light leading-relaxed">
                     {selectedPkg.description}
                   </div>
 
@@ -283,7 +283,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                             className="w-full p-4 flex justify-between items-center bg-gray-50/60 dark:bg-slate-950/40 text-left cursor-pointer"
                           >
                             <div className="flex gap-4 items-center">
-                              <span className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-mono font-bold text-xs">
+                              <span className="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-mono font-bold text-xs">
                                 D{day.day}
                               </span>
                               <span className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
@@ -305,7 +305,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                                 <ul className="space-y-2">
                                   {(day.activities || []).map((act) => (
                                     <li key={act} className="text-sm text-slate-600 dark:text-slate-300 flex items-start gap-2">
-                                      <span className="text-blue-500 font-bold shrink-0 mt-0.5">•</span>
+                                      <span className="text-amber-500 font-bold shrink-0 mt-0.5">•</span>
                                       <span>{act}</span>
                                     </li>
                                   ))}
@@ -328,7 +328,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                   </div>
                   <button
                     onClick={() => setBookingOpen(true)}
-                    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-lg shadow-blue-500/15 flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/10 flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <span>Proceed to Secure Booking</span>
                     <ArrowRight className="w-4 h-4" />
@@ -358,7 +358,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                 {/* Header */}
                 <div className="p-6 border-b border-gray-200/50 dark:border-white/5 flex justify-between items-center bg-gray-50 dark:bg-slate-950">
                   <div className="flex items-center gap-2 text-slate-900 dark:text-white">
-                    <ShoppingBag className="w-5 h-5 text-blue-600 dark:text-cyan-400" />
+                    <ShoppingBag className="w-5 h-5 text-amber-500" />
                     <span className="font-display font-medium text-lg">Secure Session Booking</span>
                   </div>
                   <button
@@ -375,7 +375,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                 {!bookingSuccess ? (
                   /* Form input */
                   <form onSubmit={handleBooking} className="p-6 space-y-6">
-                    <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex gap-3 items-start text-xs text-slate-500">
+                    <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 flex gap-3 items-start text-xs text-slate-500">
                       <ShieldCheck className="w-5 h-5 text-emerald-500 shrink-0" />
                       <span>This is a simulated secure transaction channel. Real-time notifications will be synchronized with your workspace dashboard on booking.</span>
                     </div>
@@ -391,26 +391,26 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                       <div>
                         <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Departure Date</label>
                         <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                           <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                           <input
                             type="date"
                             required
                             value={startDate}
                             onChange={(e) => setStartDate(e.target.value)}
-                            className="w-full pl-9 pr-3 py-2.5 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950 text-xs rounded-xl focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400 text-slate-900 dark:text-white"
+                            className="w-full pl-9 pr-3 py-2.5 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950 text-xs rounded-xl focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
                           />
                         </div>
                       </div>
                       <div>
                         <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Return Date</label>
                         <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                           <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                           <input
                             type="date"
                             required
                             value={endDate}
                             onChange={(e) => setEndDate(e.target.value)}
-                            className="w-full pl-9 pr-3 py-2.5 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950 text-xs rounded-xl focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400 text-slate-900 dark:text-white"
+                            className="w-full pl-9 pr-3 py-2.5 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950 text-xs rounded-xl focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
                           />
                         </div>
                       </div>
@@ -424,7 +424,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                         <select
                           value={travelers}
                           onChange={(e) => setTravelers(Number(e.target.value))}
-                          className="w-full pl-9 pr-3 py-2.5 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950 text-xs rounded-xl focus:outline-none focus:border-blue-600 dark:focus:border-cyan-400 text-slate-900 dark:text-white"
+                          className="w-full pl-9 pr-3 py-2.5 border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-slate-950 text-xs rounded-xl focus:outline-none focus:border-amber-500 text-slate-900 dark:text-white"
                         >
                           {[1, 2, 3, 4, 5, 6, 8, 10].map((num) => (
                             <option key={num} value={num}>
@@ -447,14 +447,14 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                       </div>
                       <div className="flex justify-between border-t border-gray-200 dark:border-white/5 pt-3 font-semibold text-sm text-slate-900 dark:text-white">
                         <span>TOTAL PAYABLE</span>
-                        <span className="text-blue-600 dark:text-cyan-400">₹{(selectedPkg.price * travelers).toLocaleString()}</span>
+                        <span className="text-amber-400 font-bold">₹{(selectedPkg.price * travelers).toLocaleString()}</span>
                       </div>
                     </div>
 
                     <button
                       type="submit"
                       disabled={bookingLoading}
-                      className="w-full py-3.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl shadow-lg shadow-blue-500/15 disabled:opacity-50 flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full py-3.5 px-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-xl shadow-lg shadow-amber-500/10 disabled:opacity-50 flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <CreditCard className="w-4 h-4" />
                       <span>{bookingLoading ? 'Processing Securely...' : 'Complete Secure Reservation'}</span>
@@ -471,7 +471,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                       {/* Boarding Ticket Header */}
                       <div className="bg-slate-900 text-white p-5 border-b border-dashed border-gray-200 dark:border-slate-800 relative">
                         <div className="flex justify-between items-center mb-4">
-                          <span className="text-[10px] font-mono tracking-widest text-cyan-400 uppercase font-bold">
+                          <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-bold">
                             Trippy boarding ticket
                           </span>
                           <span className="px-2 py-0.5 rounded bg-emerald-500 text-[8px] font-mono font-bold text-slate-950 uppercase">
@@ -515,7 +515,7 @@ export default function Packages({ setTab, user, isHome = false }: PackagesProps
                         <div className="border-t border-white/5 pt-4 flex justify-between items-center">
                           <div>
                             <span className="text-slate-500 text-[9px] uppercase tracking-wider block">Total Amount Paid</span>
-                            <span className="text-base font-bold text-cyan-400">₹{bookingSuccess.total_cost?.toLocaleString()}</span>
+                            <span className="text-base font-bold text-amber-400">₹{bookingSuccess.total_cost?.toLocaleString()}</span>
                           </div>
                           <div className="text-right">
                             <span className="text-slate-500 text-[9px] uppercase tracking-wider block">Security Check</span>

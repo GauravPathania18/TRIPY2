@@ -16,34 +16,41 @@ export const TrippyLogo: React.FC<TrippyLogoProps> = ({ className = 'w-10 h-10',
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        {/* Golden gradients for wing contours and borders */}
+        {/* Luxurious metallic golden gradient */}
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#DFBA6B" />
-          <stop offset="50%" stopColor="#F5D78E" />
-          <stop offset="100%" stopColor="#C19E4F" />
+          <stop offset="0%" stopColor="#B38728" />
+          <stop offset="25%" stopColor="#FBF5B7" />
+          <stop offset="50%" stopColor="#DAA520" />
+          <stop offset="75%" stopColor="#FBF5B7" />
+          <stop offset="100%" stopColor="#AA771C" />
         </linearGradient>
-        {/* Deep blue gradient for the letter T body and circular hub */}
+        {/* Deep navy gradient for the letter T body and circular hub */}
         <linearGradient id="navyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#1E295E" />
-          <stop offset="100%" stopColor="#101736" />
+          <stop offset="0%" stopColor="#0D133A" />
+          <stop offset="50%" stopColor="#080C26" />
+          <stop offset="100%" stopColor="#040615" />
         </linearGradient>
+        {/* Soft shadow to elevate the T and hub */}
+        <filter id="logoShadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000000" floodOpacity="0.5" />
+        </filter>
       </defs>
       
       {/* Symmetrical wing design representing premium air/travel wings */}
-      {/* Left Wing feathers with elegant golden layers */}
-      <path d="M72 60 C50 62, 32 50, 20 40 C35 52, 52 58, 70 58" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M72 60 C46 68, 28 58, 12 48 C28 60, 48 66, 70 64" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M72 60 C42 74, 24 66, 8 56 C24 68, 44 74, 70 70" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M72 60 C38 80, 20 74, 4 64 C20 76, 40 82, 70 76" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Left Wing - 4 layers of filled gold feathers */}
+      <path d="M72 60 C50 62, 32 50, 20 40 C35 52, 52 58, 72 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
+      <path d="M72 60 C46 68, 28 58, 12 48 C28 60, 48 66, 72 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
+      <path d="M72 60 C42 74, 24 66, 8 56 C24 68, 44 74, 72 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
+      <path d="M72 60 C38 80, 20 74, 4 64 C20 76, 40 82, 72 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
       
-      {/* Right Wing feathers with elegant golden layers */}
-      <path d="M88 60 C110 62, 128 50, 140 40 C125 52, 108 58, 90 58" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M88 60 C114 68, 132 58, 148 48 C132 60, 112 66, 90 64" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M88 60 C118 74, 136 66, 152 56 C136 68, 116 74, 90 70" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M88 60 C122 80, 140 74, 156 64 C140 76, 120 82, 90 76" fill="none" stroke="url(#goldGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Right Wing - 4 layers of filled gold feathers */}
+      <path d="M88 60 C110 62, 128 50, 140 40 C125 52, 108 58, 88 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
+      <path d="M88 60 C114 68, 132 58, 148 48 C132 60, 112 66, 88 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
+      <path d="M88 60 C118 74, 136 66, 152 56 C136 68, 116 74, 88 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
+      <path d="M88 60 C122 80, 140 74, 156 64 C140 76, 120 82, 88 60 Z" fill="url(#goldGrad)" stroke="#8A6623" strokeWidth="0.5" />
 
       {/* Elegant Letter T */}
-      <g transform="translate(10, 2)">
+      <g transform="translate(10, 2)" filter="url(#logoShadow)">
         {/* T Top Horizontal Bar and Vertical Stem */}
         <path 
           d="M38 30 H102 C102 30, 102 38, 98 40 C94 42, 82 40, 82 46 V90 C82 96, 92 98, 92 100 H48 C48 98, 58 96, 58 90 V46 C58 40, 46 42, 42 40 C38 38, 38 30, 38 30 Z" 
@@ -55,7 +62,7 @@ export const TrippyLogo: React.FC<TrippyLogoProps> = ({ className = 'w-10 h-10',
       </g>
 
       {/* Central golden hub circle */}
-      <circle cx="80" cy="62" r="14" fill="url(#navyGrad)" stroke="url(#goldGrad)" strokeWidth="3" />
+      <circle cx="80" cy="62" r="14" fill="url(#navyGrad)" stroke="url(#goldGrad)" strokeWidth="3" filter="url(#logoShadow)" />
       <circle cx="80" cy="62" r="9" fill="#141E46" />
     </svg>
   );

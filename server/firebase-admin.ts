@@ -37,8 +37,11 @@ try {
   }
 
   if (getApps().length) {
-    adminAuth = getAuth();
-    firestore = getFirestore();
+    const app = getApps()[0];
+    adminAuth = getAuth(app);
+    const dbId = (firebaseConfig as any).firestoreDatabaseId;
+    firestore = dbId ? getFirestore(app, dbId) : getFirestore(app);
+    console.log(`[Firebase Admin] Firestore initialized with databaseId: ${dbId || '(default)'}`);
   }
 } catch (error: any) {
   console.error('[Firebase Admin] Failed to initialize Firebase Admin SDK:', error.message || error);

@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, Type } from '@google/genai';
 import { db } from './server/db';
@@ -74,6 +75,25 @@ function getAuthUser(req: express.Request) {
   if (!user) return null;
   return user;
 }
+
+// Endpoint to retrieve Firebase Client Configuration (omitted from static assets)
+app.get('/api/firebase-config', (req, res) => {
+  try {
+    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
+    const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    
+    // Inject the API key from environment variable, falling back to the default dev key if not provided
+    const apiKey = process.env.FIREBASE_API_KEY ;
+    
+    res.json({
+      ...configData,
+      apiKey: apiKey
+    });
+  } catch (err: any) {
+    console.error('Failed to retrieve Firebase configuration:', err);
+    res.status(500).json({ error: 'Failed to retrieve firebase client configuration' });
+  }
+});
 
 // ==========================================
 // API Endpoints: Auth
@@ -595,6 +615,12 @@ app.post('/api/gemini/chat', async (req, res) => {
     let chat;
     let response;
     
+    // Map incoming conversation history to the Content format required by @google/genai
+    const history = (messages || []).map((msg: any) => ({
+      role: msg.role === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.text || msg.content || '' }]
+    }));
+
     // Attempt with the selected model, then fall back to reliable free models automatically if experiencing 503 high demand
     const modelsToTry = [selectedModel, 'gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-flash-8b'].filter((val, idx, self) => self.indexOf(val) === idx);
     let chatError = null;
@@ -603,8 +629,10 @@ app.post('/api/gemini/chat', async (req, res) => {
       try {
         chat = ai.chats.create({
           model: currentModel,
+          history: history,
           config: {
             systemInstruction: 'You are Trippy, an elite, luxury AI Travel Concierge. Speak with sophistication, warmth, and high professional composure. Help users with smart, curated recommendations on food, hotels, packing lists, visa guides, local cultural rules, and hidden treasures. Avoid dry developer talk; sound like a premium private concierge.',
+            tools: [{ googleSearch: {} }] // Enable Google Search Grounding
           }
         });
 
@@ -621,7 +649,17 @@ app.post('/api/gemini/chat', async (req, res) => {
     }
 
     if (response) {
-      res.json({ text: response.text });
+      // Extract Google Search grounding sources if available
+      const chunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks;
+      const sources = chunks ? chunks.map((chunk: any) => ({
+        title: chunk.web?.title || 'Google Search Source',
+        uri: chunk.web?.uri || ''
+      })).filter((src: any) => src.uri) : [];
+
+      res.json({ 
+        text: response.text,
+        sources: sources
+      });
     } else {
       throw chatError || new Error("All chat models failed");
     }
