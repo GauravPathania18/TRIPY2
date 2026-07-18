@@ -11,6 +11,7 @@ import AIPlanner from './components/AIPlanner';
 import Dashboard from './components/Dashboard';
 import Footer from './components/Footer';
 import AnimatedCounter from './components/AnimatedCounter';
+import ChatAssistant from './components/ChatAssistant';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -399,8 +400,8 @@ export default function App() {
                       <span className="text-xs sm:text-sm text-slate-400 uppercase tracking-widest font-mono">AI recommendations</span>
                     </div>
                   </div>
-                  <p className="text-center text-[10px] sm:text-xs font-mono tracking-wider text-slate-400 dark:text-slate-500 mt-10 max-w-lg mx-auto opacity-70 px-4">
-                    *Note: These statistics represent simulated platform metrics and mock benchmarks for demonstration purposes.
+                  <p className="text-center text-[11px] font-mono tracking-wider text-amber-600 dark:text-amber-400 mt-10 max-w-xl mx-auto px-4 bg-amber-500/5 dark:bg-amber-500/10 py-2 border border-amber-500/20 rounded-xl">
+                    ⚠️ Demo Disclaimer: These impact statistics and traveler metrics represent simulated illustrative benchmarks for demonstration purposes.
                   </p>
                 </section>
               </ScrollReveal>
@@ -675,6 +676,9 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Floating AI Concierge Assistant */}
+      <ChatAssistant user={user} />
 
     </div>
   );
