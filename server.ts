@@ -83,7 +83,7 @@ app.get('/api/firebase-config', (req, res) => {
     const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
     
     // Inject the API key from environment variable, falling back to the default dev key if not provided
-    const apiKey = process.env.FIREBASE_API_KEY || 'AIzaSyA_5oWyvB3UguwGxlURxxsk9x6eG6Sb_6o';
+    const apiKey = process.env.FIREBASE_API_KEY ;
     
     res.json({
       ...configData,
