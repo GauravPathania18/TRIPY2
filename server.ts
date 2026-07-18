@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, Type } from '@google/genai';
 import { db } from './server/db';
@@ -74,6 +75,25 @@ function getAuthUser(req: express.Request) {
   if (!user) return null;
   return user;
 }
+
+// Endpoint to retrieve Firebase Client Configuration (omitted from static assets)
+app.get('/api/firebase-config', (req, res) => {
+  try {
+    const configPath = path.join(process.cwd(), 'firebase-applet-config.json');
+    const configData = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    
+    // Inject the API key from environment variable, falling back to the default dev key if not provided
+    const apiKey = process.env.FIREBASE_API_KEY || 'AIzaSyA_5oWyvB3UguwGxlURxxsk9x6eG6Sb_6o';
+    
+    res.json({
+      ...configData,
+      apiKey: apiKey
+    });
+  } catch (err: any) {
+    console.error('Failed to retrieve Firebase configuration:', err);
+    res.status(500).json({ error: 'Failed to retrieve firebase client configuration' });
+  }
+});
 
 // ==========================================
 // API Endpoints: Auth
