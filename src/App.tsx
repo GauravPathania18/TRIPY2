@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Compass, Sparkles, MapPin, Users, Calendar, ArrowRight, Shield, RefreshCw, Star, Heart, FileText, CheckCircle2 } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import GlobeSection from './components/GlobeSection';
 import Login from './components/Login';
@@ -680,6 +681,7 @@ export default function App() {
       {/* Floating AI Concierge Assistant */}
       <ChatAssistant user={user} />
 
+      <SpeedInsights />
     </div>
   );
 }
