@@ -1,7 +1,9 @@
 {
-  "name": "react-example",
+  "name": "trippy",
+  "description": "Bespoke full-stack luxury travel planner featuring an interactive 3D Globe, predictive climate intelligence, and AI itinerary routing with Google Gemini.",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
