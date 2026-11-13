@@ -15,7 +15,11 @@
  */
 import { createRequire } from 'node:module';
 
-const require = createRequire(import.meta.url);
+// import.meta.url on Vercel (native ESM); falls back to a cwd-based path when
+// this file is bundled to CJS for local testing (esbuild empties import.meta).
+const require = createRequire(
+  (import.meta as any)?.url ?? process.cwd() + '/api/index.js'
+);
 
 // Trace-only: ensure ../server/app.js is included in the lambda bundle.
 try {

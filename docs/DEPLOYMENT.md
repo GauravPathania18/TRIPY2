@@ -138,7 +138,8 @@ curl -i https://tripy-2.vercel.app/
 | Check | Result | Meaning |
 |---|---|---|
 | `/api/destinations` | `404 NOT_FOUND` + `X-Vercel-Error: NOT_FOUND` | Infrastructure has no function — `vercel.json` / `api/index.ts` missing or not deployed (this was the state before the wiring was added) |
-| `/api/destinations` | `5xx` | Function crashed — check **Deployments → Functions → Runtime logs** |
+| `/api/destinations` | `500` + JSON body with `error` / `detail` | The serverless entry caught a startup failure — **read `detail`**, it names the exact module or error |
+| `/api/destinations` | bare `FUNCTION_INVOCATION_FAILED` (no JSON) | Crash before the entry even ran — check **Deployments → Functions → Runtime logs** |
 | `/api/firebase-config` | `apiKey` missing | `FIREBASE_API_KEY` not set (or needs redeploy) |
 | `/api/gemini/chat` | 200 but `_fallback: true` / simulated text | `GEMINI_API_KEY` missing |
 | AI endpoints | `504` / timeout | Model call exceeded the function's max duration — raise **Settings → Functions → Max Duration** (the Gemini search-grounded chat is the slowest endpoint) |
@@ -155,6 +156,16 @@ curl -i https://tripy-2.vercel.app/
 
 **Firestore sync errors in logs**
 → The service-account JSON must be a single line and valid JSON. The server logs a warning and continues in local mode if it is malformed.
+
+**API returns `FUNCTION_INVOCATION_FAILED` or a JSON `detail` about modules**
+→ The function runs as **native ES modules** (`"type": "module"`), which is stricter than local dev. Three rules keep it booting, and all are already applied in this repo — break one and the function dies at startup:
+  - relative server imports carry **explicit `.js` extensions** (`'./config/env.js'`) — Node's ESM loader does not guess extensions;
+  - JSON imports use **`with { type: 'json' }`** — bare JSON imports are rejected;
+  - `firebase-admin/auth` is loaded **lazily** because it eagerly pulls `jose`, an ESM-only package that older Node runtimes refuse to `require()`.
+  If a failure still occurs, the entry returns it as readable `{ error, detail }` JSON — read `detail` first, then the function logs.
+
+**`engines: node >= 22` in package.json seems ignored**
+→ A Node.js Version pinned in **Project Settings → General** takes precedence over `engines`. Set it to `22.x` (or newer) there; modern runtimes also gain `require(ESM)`, which some transitive dependencies assume.
 
 **Weather shows different values than OpenWeatherMap**
 → Expected: without `OPENWEATHER_API_KEY` the chain falls back to Open-Meteo (check the `source` field in the response: `openweathermap` → `open-meteo` → `fallback`).
