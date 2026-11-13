@@ -1,5 +1,8 @@
-import { Compass, Sparkles, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { AnimatePresence } from 'motion/react';
+import { Compass, Sparkles, Send, CheckCircle2 } from 'lucide-react';
 import { TrippyLogo } from './TrippyLogo';
+import ContactModal from './contact/ContactModal';
 
 interface FooterProps {
   setTab: (tab: string) => void;
@@ -7,6 +10,33 @@ interface FooterProps {
 
 export default function Footer({ setTab }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const [showContact, setShowContact] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterState, setNewsletterState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
+
+  // Newsletter signup lands in the admin contact inbox (POST /api/contact).
+  const handleNewsletter = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail) return;
+    setNewsletterState('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Newsletter Subscriber',
+          email: newsletterEmail,
+          subject: 'Weekly Bulletins Subscription',
+          message: 'User subscribed to the Weekly Bulletins newsletter from the footer.',
+        }),
+      });
+      if (!res.ok) throw new Error('subscribe failed');
+      setNewsletterState('done');
+      setNewsletterEmail('');
+    } catch {
+      setNewsletterState('error');
+    }
+  };
 
   return (
     <footer className="bg-[#040613] text-white border-t border-amber-500/20 py-16 relative overflow-hidden text-left" id="main-footer">
@@ -56,6 +86,11 @@ export default function Footer({ setTab }: FooterProps) {
                   Packages
                 </button>
               </li>
+              <li>
+                <button onClick={() => setShowContact(true)} className="hover:text-amber-400 transition cursor-pointer">
+                  Contact Us
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -87,20 +122,31 @@ export default function Footer({ setTab }: FooterProps) {
             <p className="text-xs text-slate-400 font-light">
               Join our exclusive club of adventurers for seasonal destination releases.
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+            <form onSubmit={handleNewsletter} className="flex gap-2">
               <input
                 type="email"
                 required
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="enter your email..."
+                aria-label="Newsletter email"
                 className="flex-1 px-3.5 py-2.5 bg-slate-900/60 border border-white/5 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500/50"
               />
               <button
                 type="submit"
-                className="p-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 transition flex items-center justify-center text-slate-950 cursor-pointer"
+                aria-label="Subscribe to weekly bulletins"
+                disabled={newsletterState === 'sending'}
+                className="p-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 disabled:opacity-60 transition flex items-center justify-center text-slate-950 cursor-pointer"
               >
-                <Send className="w-4 h-4" />
+                {newsletterState === 'done' ? <CheckCircle2 className="w-4 h-4" /> : <Send className="w-4 h-4" />}
               </button>
             </form>
+            {newsletterState === 'done' && (
+              <p className="text-[10px] font-mono text-amber-400">✦ You're on the list — welcome aboard!</p>
+            )}
+            {newsletterState === 'error' && (
+              <p className="text-[10px] font-mono text-red-400">Subscription failed — please try again.</p>
+            )}
           </div>
 
         </div>
@@ -115,6 +161,11 @@ export default function Footer({ setTab }: FooterProps) {
           </div>
         </div>
       </div>
+
+      {/* Contact modal (public POST /api/contact) */}
+      <AnimatePresence>
+        {showContact && <ContactModal onClose={() => setShowContact(false)} />}
+      </AnimatePresence>
     </footer>
   );
 }

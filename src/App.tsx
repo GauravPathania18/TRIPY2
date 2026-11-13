@@ -102,6 +102,27 @@ export default function App() {
     }
   };
 
+  const markNotificationRead = async (notifId: string) => {
+    if (!user) return;
+    const target = notifications.find((n) => n.id === notifId);
+    if (!target || target.is_read) return;
+    try {
+      const res = await fetch(`/api/notifications/${notifId}/read`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${user.id}:user` }
+      });
+      if (res.status === 401) {
+        handleLogout();
+        return;
+      }
+      if (res.ok) {
+        setNotifications(prev => prev.map(n => n.id === notifId ? { ...n, is_read: true } : n));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleAuthSuccess = (authUser: any, authToken: string) => {
     setUser(authUser);
     setToken(authToken);
@@ -131,7 +152,7 @@ export default function App() {
         setTab={setTab}
         user={user}
         logout={handleLogout}
-        notificationsCount={notifications.length}
+        notificationsCount={notifications.filter((n) => !n.is_read).length}
         openNotifications={() => setShowNotificationDrawer(true)}
       />
 
@@ -663,13 +684,19 @@ export default function App() {
                   <p className="text-xs text-slate-400 py-4 font-mono">No new bulletins listed.</p>
                 ) : (
                   notifications.map((notif) => (
-                    <div key={notif.id} className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl border border-gray-100 dark:border-white/5 text-xs text-slate-500 leading-relaxed font-mono">
+                    <button
+                      key={notif.id}
+                      type="button"
+                      onClick={() => markNotificationRead(notif.id)}
+                      title={notif.is_read ? 'Read' : 'Click to mark as read'}
+                      className={`w-full text-left p-3.5 bg-slate-50 dark:bg-slate-950 rounded-xl border border-gray-100 dark:border-white/5 text-xs text-slate-500 leading-relaxed font-mono cursor-pointer hover:border-amber-500/40 transition ${notif.is_read ? 'opacity-60' : ''}`}
+                    >
                       <p className="font-semibold text-slate-800 dark:text-slate-200 mb-1 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-amber-500 rounded-full shrink-0"></span>
+                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${notif.is_read ? 'bg-slate-300 dark:bg-slate-600' : 'bg-amber-500'}`}></span>
                         {notif.title}
                       </p>
                       <p className="font-light">{notif.message}</p>
-                    </div>
+                    </button>
                   ))
                 )}
               </div>
