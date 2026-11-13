@@ -1,58 +1,54 @@
 /**
- * Vercel serverless entry point — diagnostic build.
+ * Vercel serverless entry point.
  *
- * Loads the Express app through createRequire inside a try/catch so that
- * ANY failure (missing file, module-load throw, wrong Node semantics)
- * comes back as a readable JSON body instead of FUNCTION_INVOCATION_FAILED.
- * require() literals are still static-analysis-visible to Vercel's tracer,
- * so the app files are included in the lambda.
+ * The app is loaded with a dynamic import() inside the handler:
+ *   - works on every Node version (require(ESM) needs Node >= 22.12)
+ *   - any failure while loading/evaluating the app becomes a readable
+ *     JSON response instead of a bare FUNCTION_INVOCATION_FAILED
+ *
+ * The require.resolve() literal below is never executed for its side
+ * effect — it exists so Vercel's file tracer statically sees the app
+ * and ships it inside the lambda (require.resolve is tracer-visible).
+ *
+ * Static assets are served by Vercel's CDN from dist/ (see vercel.json).
+ * Local development is unaffected — it still runs `server.ts` directly.
  */
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
-// What actually exists inside the lambda?
-const probes: Record<string, string> = {};
-for (const p of [
-  '../server/app.js',
-  '../server/app.ts',
-  '../server/routes/index.js',
-  '../server/db.js',
-  '../firebase-applet-config.json',
-  'express',
-]) {
-  try {
-    probes[p] = require.resolve(p);
-  } catch {
-    probes[p] = 'MISSING';
-  }
+// Trace-only: ensure ../server/app.js is included in the lambda bundle.
+try {
+  require.resolve('../server/app.js');
+} catch {
+  // Not resolvable at build time — the handler below will report it.
 }
 
-let createApp: any = null;
-let loadError: string | null = null;
-try {
-  const mod = require('../server/app.js');
-  createApp = mod.createApp || (mod.default && mod.default.createApp);
-  if (typeof createApp !== 'function') {
-    loadError = 'module loaded but createApp is ' + typeof createApp;
+let appPromise: Promise<any> | null = null;
+
+function loadApp(): Promise<any> {
+  if (!appPromise) {
+    appPromise = import('../server/app.js')
+      .then((m: any) => m.createApp())
+      .catch((err) => {
+        appPromise = null; // let the next request retry
+        throw err;
+      });
   }
-} catch (err: any) {
-  loadError = String((err && err.stack) || err);
+  return appPromise;
 }
 
 export default async function handler(req: any, res: any) {
-  if (!createApp) {
-    res.status(500).json({ stage: 'module-load', probes, error: loadError });
-    return;
-  }
   try {
-    const app = await createApp();
+    const app = await loadApp();
     app(req, res);
   } catch (err: any) {
-    res.status(500).json({
-      stage: 'createApp',
-      probes,
-      error: String((err && err.stack) || err),
-    });
+    console.error('[api] Failed to load or handle:', err);
+    if (!res.headersSent) {
+      res.status(500).json({
+        error: 'Application failed to start',
+        detail: String((err && err.stack) || err),
+      });
+    }
   }
 }
