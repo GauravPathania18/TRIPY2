@@ -5,7 +5,7 @@
  * (selected model -> reliable free models) lives in exactly one place.
  */
 import { GoogleGenAI } from '@google/genai';
-import { env } from '../config/env';
+import { env } from '../config/env.js';
 
 /** Shared Gemini client (no-op until GEMINI_API_KEY is configured). */
 export const ai = new GoogleGenAI({

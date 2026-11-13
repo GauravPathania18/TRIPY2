@@ -9,8 +9,8 @@
  * this file staying at the project root.
  */
 import './server/config/env';
-import { createApp } from './server/app';
-import { env } from './server/config/env';
+import { createApp } from './server/app.js';
+import { env } from './server/config/env.js';
 
 async function startServer() {
   const app = await createApp();

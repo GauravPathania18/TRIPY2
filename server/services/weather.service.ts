@@ -9,7 +9,7 @@
  *
  * This consolidates the previously duplicated lat/lon and city branches.
  */
-import { env } from '../config/env';
+import { env } from '../config/env.js';
 
 export interface WeatherResult {
   temp: number;

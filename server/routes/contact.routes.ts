@@ -2,8 +2,8 @@
  * Contact-inbox routes: public submission, admin-only listing.
  */
 import { Router } from 'express';
-import { db } from '../db';
-import { requireAdmin } from '../lib/auth';
+import { db } from '../db.js';
+import { requireAdmin } from '../lib/auth.js';
 
 const router = Router();
 

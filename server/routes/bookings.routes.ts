@@ -6,9 +6,9 @@
  * which previously called a non-existent endpoint.
  */
 import { Router } from 'express';
-import { db } from '../db';
-import { requireAuth } from '../lib/auth';
-import { BookingStatus, UserRole } from '../../src/types';
+import { db } from '../db.js';
+import { requireAuth } from '../lib/auth.js';
+import { BookingStatus, UserRole } from '../../src/types.js';
 
 const router = Router();
 

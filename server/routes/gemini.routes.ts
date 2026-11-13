@@ -10,24 +10,24 @@
  * simulated data instead of an error.
  */
 import { Router } from 'express';
-import { db } from '../db';
-import { env } from '../config/env';
-import { generateContentWithFallback, sendChatWithFallback } from '../lib/gemini';
+import { db } from '../db.js';
+import { env } from '../config/env.js';
+import { generateContentWithFallback, sendChatWithFallback } from '../lib/gemini.js';
 import {
   buildDestinationFromAI,
   buildDiscoverPrompt,
   createSimulatedDestination,
   DISCOVER_SCHEMA,
-} from '../services/destination.service';
+} from '../services/destination.service.js';
 import {
   buildRecommendationsPrompt,
   createFallbackRecommendations,
-} from '../services/recommendations.service';
+} from '../services/recommendations.service.js';
 import {
   buildTripPrompt,
   createFallbackTrip,
   normalizeTripResponse,
-} from '../services/trip.service';
+} from '../services/trip.service.js';
 
 const router = Router();
 

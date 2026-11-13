@@ -3,20 +3,20 @@
  */
 import { Router } from 'express';
 
-import authRoutes from './auth.routes';
-import blogsRoutes from './blogs.routes';
-import bookingsRoutes from './bookings.routes';
-import contactRoutes from './contact.routes';
-import destinationsRoutes from './destinations.routes';
-import favoritesRoutes from './favorites.routes';
-import firebaseConfigRoutes from './firebase-config.routes';
-import geminiRoutes from './gemini.routes';
-import notificationsRoutes from './notifications.routes';
-import packagesRoutes from './packages.routes';
-import proxyRoutes from './proxy.routes';
-import reviewsRoutes from './reviews.routes';
-import tripsRoutes from './trips.routes';
-import weatherRoutes from './weather.routes';
+import authRoutes from './auth.routes.js';
+import blogsRoutes from './blogs.routes.js';
+import bookingsRoutes from './bookings.routes.js';
+import contactRoutes from './contact.routes.js';
+import destinationsRoutes from './destinations.routes.js';
+import favoritesRoutes from './favorites.routes.js';
+import firebaseConfigRoutes from './firebase-config.routes.js';
+import geminiRoutes from './gemini.routes.js';
+import notificationsRoutes from './notifications.routes.js';
+import packagesRoutes from './packages.routes.js';
+import proxyRoutes from './proxy.routes.js';
+import reviewsRoutes from './reviews.routes.js';
+import tripsRoutes from './trips.routes.js';
+import weatherRoutes from './weather.routes.js';
 
 const router = Router();
 

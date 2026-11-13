@@ -3,8 +3,8 @@
  * All responses preserve the original API contract.
  */
 import { Router } from 'express';
-import { db } from '../db';
-import { requireAuth } from '../lib/auth';
+import { db } from '../db.js';
+import { requireAuth } from '../lib/auth.js';
 
 const router = Router();
 

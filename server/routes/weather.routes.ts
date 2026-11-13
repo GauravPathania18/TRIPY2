@@ -2,7 +2,7 @@
  * Weather route — thin wrapper around the weather service chain.
  */
 import { Router } from 'express';
-import { getWeather } from '../services/weather.service';
+import { getWeather } from '../services/weather.service.js';
 
 const router = Router();
 

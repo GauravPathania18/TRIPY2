@@ -6,8 +6,8 @@
  * `requireAuth` / `requireAdmin` middleware wrap it for route handlers.
  */
 import type { Request, Response, NextFunction } from 'express';
-import { db } from '../db';
-import { User, UserRole } from '../../src/types';
+import { db } from '../db.js';
+import { User, UserRole } from '../../src/types.js';
 
 declare global {
   namespace Express {

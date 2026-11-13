@@ -9,7 +9,7 @@
  * so it is baked into serverless bundles, where cwd files may not exist.
  */
 import { Router } from 'express';
-import { env } from '../config/env';
+import { env } from '../config/env.js';
 import firebaseAppConfig from '../../firebase-applet-config.json' with { type: 'json' };
 
 const router = Router();

@@ -2,8 +2,8 @@
  * Blog routes: public reads, admin creation, authenticated comments.
  */
 import { Router } from 'express';
-import { db } from '../db';
-import { requireAdmin, requireAuth } from '../lib/auth';
+import { db } from '../db.js';
+import { requireAdmin, requireAuth } from '../lib/auth.js';
 
 const router = Router();
 

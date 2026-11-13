@@ -1,4 +1,4 @@
-import { Destination, TourPackage, Blog, Review, DestinationCategory, PackageDifficulty, BlogCategory, UserRole } from '../src/types';
+import { Destination, TourPackage, Blog, Review, DestinationCategory, PackageDifficulty, BlogCategory, UserRole } from '../src/types.js';
 
 export const mockDestinations: Destination[] = [
   {

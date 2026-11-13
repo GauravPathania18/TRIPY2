@@ -10,8 +10,8 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
-import { env } from './config/env';
-import apiRoutes from './routes/index';
+import { env } from './config/env.js';
+import apiRoutes from './routes/index.js';
 
 export async function createApp(): Promise<express.Express> {
   const app = express();

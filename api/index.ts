@@ -14,7 +14,7 @@
  * Local development is unaffected — it still runs `server.ts` directly.
  */
 import type express from 'express';
-import { createApp } from '../server/app';
+import { createApp } from '../server/app.js';
 
 let appPromise: Promise<express.Express> | null = null;
 

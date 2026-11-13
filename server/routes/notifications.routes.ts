@@ -2,8 +2,8 @@
  * Notification routes: per-user bulletin list + mark-as-read.
  */
 import { Router } from 'express';
-import { db } from '../db';
-import { requireAuth } from '../lib/auth';
+import { db } from '../db.js';
+import { requireAuth } from '../lib/auth.js';
 
 const router = Router();
 

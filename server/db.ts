@@ -3,9 +3,9 @@ import path from 'path';
 import { 
   User, Destination, TourPackage, Booking, Review, Blog, BlogComment, 
   SavedTrip, Favorite, ContactMessage, Notification, UserRole, BookingStatus 
-} from '../src/types';
-import { mockDestinations, mockPackages, mockBlogs, mockReviews } from './mockData';
-import { firestore } from './firebase-admin';
+} from '../src/types.js';
+import { mockDestinations, mockPackages, mockBlogs, mockReviews } from './mockData.js';
+import { firestore } from './firebase-admin.js';
 
 interface DatabaseSchema {
   users: User[];
