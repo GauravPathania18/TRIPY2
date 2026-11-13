@@ -1,44 +1,58 @@
 /**
- * Vercel serverless entry point.
+ * Vercel serverless entry point — diagnostic build.
  *
- * Wraps the shared Express app (created once per warm lambda) and hands
- * every /api/* request to it. Static frontend assets are served by
- * Vercel's CDN from dist/ (see vercel.json), so express.static inside
- * the app becomes a harmless no-op in this environment.
- *
- * The app is imported statically so Vercel's bundler traces it into the
- * lambda (its tracer does not follow dynamic imports); the handler still
- * guards app creation so runtime failures return a readable 500 instead
- * of a bare FUNCTION_INVOCATION_FAILED.
- *
- * Local development is unaffected — it still runs `server.ts` directly.
+ * Loads the Express app through createRequire inside a try/catch so that
+ * ANY failure (missing file, module-load throw, wrong Node semantics)
+ * comes back as a readable JSON body instead of FUNCTION_INVOCATION_FAILED.
+ * require() literals are still static-analysis-visible to Vercel's tracer,
+ * so the app files are included in the lambda.
  */
-import type express from 'express';
-import { createApp } from '../server/app.js';
+import { createRequire } from 'node:module';
 
-let appPromise: Promise<express.Express> | null = null;
+const require = createRequire(import.meta.url);
 
-function getApp(): Promise<express.Express> {
-  if (!appPromise) {
-    appPromise = createApp().catch((err) => {
-      appPromise = null; // allow the next request to retry
-      throw err;
-    });
+// What actually exists inside the lambda?
+const probes: Record<string, string> = {};
+for (const p of [
+  '../server/app.js',
+  '../server/app.ts',
+  '../server/routes/index.js',
+  '../server/db.js',
+  '../firebase-applet-config.json',
+  'express',
+]) {
+  try {
+    probes[p] = require.resolve(p);
+  } catch {
+    probes[p] = 'MISSING';
   }
-  return appPromise;
+}
+
+let createApp: any = null;
+let loadError: string | null = null;
+try {
+  const mod = require('../server/app.js');
+  createApp = mod.createApp || (mod.default && mod.default.createApp);
+  if (typeof createApp !== 'function') {
+    loadError = 'module loaded but createApp is ' + typeof createApp;
+  }
+} catch (err: any) {
+  loadError = String((err && err.stack) || err);
 }
 
 export default async function handler(req: any, res: any) {
+  if (!createApp) {
+    res.status(500).json({ stage: 'module-load', probes, error: loadError });
+    return;
+  }
   try {
-    const app = await getApp();
+    const app = await createApp();
     app(req, res);
   } catch (err: any) {
-    console.error('[api] Failed to start or handle request:', err);
-    if (!res.headersSent) {
-      res.status(500).json({
-        error: 'Application failed to start',
-        detail: String(err?.message || err),
-      });
-    }
+    res.status(500).json({
+      stage: 'createApp',
+      probes,
+      error: String((err && err.stack) || err),
+    });
   }
 }
