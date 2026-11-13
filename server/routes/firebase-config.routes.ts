@@ -10,7 +10,7 @@
  */
 import { Router } from 'express';
 import { env } from '../config/env';
-import firebaseAppConfig from '../../firebase-applet-config.json';
+import firebaseAppConfig from '../../firebase-applet-config.json' with { type: 'json' };
 
 const router = Router();
 
