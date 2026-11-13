@@ -318,6 +318,7 @@ class Database {
 
   // --- Bookings CRUD ---
   getBookings(): Booking[] { return this.data.bookings; }
+  getBooking(id: string): Booking | undefined { return this.data.bookings.find(b => b.id === id); }
   getBookingsByUser(userId: string): Booking[] { return this.data.bookings.filter(b => b.user_id === userId); }
   createBooking(userId: string, packageId: string, travelers: number, totalCost: number, startDate: string, endDate: string): Booking {
     const id = 'book-' + Math.random().toString(36).substr(2, 9);
