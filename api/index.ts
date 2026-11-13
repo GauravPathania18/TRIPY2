@@ -6,22 +6,39 @@
  * Vercel's CDN from dist/ (see vercel.json), so express.static inside
  * the app becomes a harmless no-op in this environment.
  *
+ * The app is imported lazily inside the handler so that any module-load
+ * failure surfaces as a readable 500 instead of a bare
+ * FUNCTION_INVOCATION_FAILED with no detail.
+ *
  * Local development is unaffected — it still runs `server.ts` directly.
  */
 import type express from 'express';
-import { createApp } from '../server/app';
 
-// Cache the app across invocations (warm lambdas reuse it).
 let appPromise: Promise<express.Express> | null = null;
 
 function getApp(): Promise<express.Express> {
   if (!appPromise) {
-    appPromise = createApp();
+    appPromise = import('../server/app')
+      .then((m) => m.createApp())
+      .catch((err) => {
+        appPromise = null; // allow the next request to retry
+        throw err;
+      });
   }
   return appPromise;
 }
 
 export default async function handler(req: any, res: any) {
-  const app = await getApp();
-  app(req, res);
+  try {
+    const app = await getApp();
+    app(req, res);
+  } catch (err: any) {
+    console.error('[api] Failed to start or handle request:', err);
+    if (!res.headersSent) {
+      res.status(500).json({
+        error: 'Application failed to start',
+        detail: String(err?.message || err),
+      });
+    }
+  }
 }

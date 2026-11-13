@@ -46,23 +46,31 @@ class Database {
   }
 
   private init() {
-    // Ensure the folder exists
-    const dir = path.dirname(DB_FILE);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
+    try {
+      // Ensure the folder exists
+      const dir = path.dirname(DB_FILE);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
 
-    if (fs.existsSync(DB_FILE)) {
-      try {
-        const content = fs.readFileSync(DB_FILE, 'utf-8');
-        this.data = JSON.parse(content);
-        console.log('Database loaded successfully from file.');
-      } catch (err) {
-        console.error('Error parsing db.json, reinitializing...', err);
+      if (fs.existsSync(DB_FILE)) {
+        try {
+          const content = fs.readFileSync(DB_FILE, 'utf-8');
+          this.data = JSON.parse(content);
+          console.log('Database loaded successfully from file.');
+        } catch (err) {
+          console.error('Error parsing db.json, reinitializing...', err);
+          this.loadSeedData();
+        }
+      } else {
+        console.log('Database file not found, seeding database...');
         this.loadSeedData();
       }
-    } else {
-      console.log('Database file not found, seeding database...');
+    } catch (err) {
+      // Read-only filesystems (e.g. serverless sandboxes) can't host the
+      // file store — fall back to seeded in-memory data. Firestore remains
+      // the persistence layer whenever it is configured.
+      console.warn('[db] Local file store unavailable, using in-memory data.', err);
       this.loadSeedData();
     }
 
